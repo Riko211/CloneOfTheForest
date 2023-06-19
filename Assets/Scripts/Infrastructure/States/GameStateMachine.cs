@@ -8,11 +8,11 @@ namespace Infrastructure.States
         private Dictionary<Type, IState> _states;
         private IState _activeState;
 
-        public GameStateMachine()
+        public GameStateMachine(AllServices services, ICoroutineRunner coroutineRunner)
         {
             _states = new Dictionary<Type, IState>()
             {
-                [typeof(BootstrapState)] = new BootstrapState(this),
+                [typeof(BootState)] = new BootState(services, coroutineRunner, this),
             };
         }
         public void Enter<TState>() where TState : IState

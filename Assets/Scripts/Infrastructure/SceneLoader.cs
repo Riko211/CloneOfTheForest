@@ -1,18 +1,37 @@
+using Infrastructure;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+namespace Infrastructure.Services
 {
-    public IEnumerator LoadScene(string name, Action onLoaded = null)
+    public class SceneLoader : IService
     {
-        AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(name);
+        private readonly ICoroutineRunner _coroutineRunner;
 
-        while (!waitNextScene.isDone) yield return null;
+        public SceneLoader(ICoroutineRunner coroutineRunner) =>
+            _coroutineRunner = coroutineRunner;
 
-        onLoaded?.Invoke();
+        public void Load(string name, Action onLoaded = null) =>
+            _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
+
+        private IEnumerator LoadScene(string nextScene, Action onLoaded = null)
+        {
+            if (SceneManager.GetActiveScene().name == nextScene)
+            {
+                onLoaded?.Invoke();
+                yield break;
+            }
+
+            AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(nextScene);
+
+            while (!waitNextScene.isDone)
+                yield return null;
+
+            onLoaded?.Invoke();
+        }
+
     }
-    
 }

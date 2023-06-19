@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Infrastructure
 {
-    public class GameBootstrapper : MonoBehaviour
+    public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
         public GameBootstrapper Instance;
         public GameStateMachine StateMachine;
@@ -11,8 +11,8 @@ namespace Infrastructure
         private void Awake()
         {
             Instance = this;
-            StateMachine = new GameStateMachine();
-            StateMachine.Enter<BootstrapState>();
+            StateMachine = new GameStateMachine(new AllServices(), this);
+            StateMachine.Enter<BootState>();
 
 
             DontDestroyOnLoad(this);
