@@ -1,5 +1,8 @@
-﻿public interface IState
+﻿namespace Infrastructure.States
 {
-    void Enter();
-    void Exit();
+    public interface IState
+    {
+        void Enter();
+        void Exit();
+    }
 }

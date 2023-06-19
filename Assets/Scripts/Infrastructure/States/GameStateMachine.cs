@@ -1,20 +1,29 @@
 using System;
 using System.Collections.Generic;
 
-public class GameStateMachine
+namespace Infrastructure.States
 {
-    private Dictionary<Type, IState> _states;
-    private IState _activeState;
+    public class GameStateMachine
+    {
+        private Dictionary<Type, IState> _states;
+        private IState _activeState;
 
-    public GameStateMachine()
-    {
-        _states = new Dictionary<Type, IState>();
+        public GameStateMachine()
+        {
+            _states = new Dictionary<Type, IState>()
+            {
+                [typeof(BootstrapState)] = new BootstrapState(this),
+            };
+        }
+        public void Enter<TState>() where TState : IState
+        {
+            _activeState?.Exit();
+            IState state = _states[typeof(TState)];
+            _activeState = state;
+            state.Enter();
+        }
     }
-    public void Enter<TState>() where TState : IState
-    {
-        _activeState?.Exit();
-        IState state = _states[typeof(TState)];
-        _activeState = state;
-        state.Enter();
-    }
+
 }
+
+
