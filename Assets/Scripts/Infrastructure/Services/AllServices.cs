@@ -1,7 +1,6 @@
-using Infrastructure.Services;
 using UnityEngine;
 
-namespace Infrastructure
+namespace Infrastructure.Services
 {
     public class AllServices
     {

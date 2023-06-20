@@ -11,7 +11,7 @@ namespace Infrastructure.States
         private readonly AllServices _services;
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly GameStateMachine _gameStateMachine;
-        private readonly SceneLoader _sceneLoader;
+        private SceneLoader _sceneLoader;
 
         public BootState(AllServices services, ICoroutineRunner coroutineRunner, GameStateMachine gameStateMachine)
         {
@@ -24,6 +24,8 @@ namespace Infrastructure.States
         public void Enter()
         {
             RegisterServices();
+            //_sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+            _sceneLoader = _services.Single<SceneLoader>();
             _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
         }
 
