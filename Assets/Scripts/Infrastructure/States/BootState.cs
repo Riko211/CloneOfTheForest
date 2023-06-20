@@ -7,7 +7,7 @@ namespace Infrastructure.States
 {
     public class BootState : IState
     {
-        private const string Initial = "Initial";
+        private const string GameSceneName = "GameScene";
         private readonly AllServices _services;
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly GameStateMachine _gameStateMachine;
@@ -26,12 +26,12 @@ namespace Infrastructure.States
             RegisterServices();
             //_sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
             _sceneLoader = _services.Single<SceneLoader>();
-            _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+            _sceneLoader.Load(GameSceneName, onLoaded: EnterLoadLevel);
         }
 
         private void EnterLoadLevel()
         {
-            throw new NotImplementedException();
+            _gameStateMachine.Enter<LoadLevelState>();
         }
 
         private void RegisterServices()

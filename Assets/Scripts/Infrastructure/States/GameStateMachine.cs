@@ -14,6 +14,7 @@ namespace Infrastructure.States
             _states = new Dictionary<Type, IState>()
             {
                 [typeof(BootState)] = new BootState(services, coroutineRunner, this),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<SceneLoader>()),
             };
         }
         public void Enter<TState>() where TState : IState
