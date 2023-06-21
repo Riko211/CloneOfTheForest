@@ -1,6 +1,7 @@
 using Infrastructure.Services;
 using System;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 namespace Infrastructure.States
@@ -10,12 +11,13 @@ namespace Infrastructure.States
         private Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(AllServices services, ICoroutineRunner coroutineRunner)
+        public GameStateMachine(AllServices services, LoadingScreen loadingScreen, ICoroutineRunner coroutineRunner)
         {
             _states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(BootState)] = new BootState(services, coroutineRunner, this),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, services),
+                [typeof(LoadLevelState)] = new LoadLevelState(services, loadingScreen, this),
+                [typeof(GameFlowState)] = new GameFlowState(this),
             };
         }
         public void Enter<TState>() where TState : class, IState
