@@ -7,7 +7,7 @@ namespace Infrastructure.States
 {
     public class BootState : IState
     {
-        private const string GameSceneName = "GameScene";
+        private const string Initial = "Boot";
         private readonly AllServices _services;
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly GameStateMachine _gameStateMachine;
@@ -17,16 +17,16 @@ namespace Infrastructure.States
         {
             _services = services;
             _coroutineRunner = coroutineRunner;
-            _gameStateMachine = gameStateMachine;
-            LockFPS();
+            _gameStateMachine = gameStateMachine;       
         }
 
         public void Enter()
         {
+            LockFPS();
             RegisterServices();
-            //_sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
+
             _sceneLoader = _services.Single<SceneLoader>();
-            _sceneLoader.Load(GameSceneName, onLoaded: EnterLoadLevel);
+            _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
         }
 
         private void EnterLoadLevel()
@@ -47,7 +47,6 @@ namespace Infrastructure.States
 
         public void Exit()
         {
-
         }
     }
 }

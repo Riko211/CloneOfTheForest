@@ -1,6 +1,7 @@
 using Infrastructure.Services;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Infrastructure.States
 {
@@ -14,7 +15,7 @@ namespace Infrastructure.States
             _states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(BootState)] = new BootState(services, coroutineRunner, this),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<SceneLoader>()),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, services),
             };
         }
         public void Enter<TState>() where TState : class, IState
