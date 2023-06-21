@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Infrastructure.States
 {
-    public class LoadLevelState : IState
+    public class LoadLevelState : IPayloadedState<string>
     {
         private readonly GameStateMachine _gameStateMachine;
         private readonly SceneLoader _sceneLoader;
@@ -19,9 +19,9 @@ namespace Infrastructure.States
         public GameStateMachine GameStateMachine { get; }
         public SceneLoader SceneLoader { get; }
 
-        public void Enter()
+        public void Enter(string sceneName)
         {
-            //_sceneLoader.Load("GameScene");
+            _sceneLoader.Load(sceneName);
         }
 
         public void Exit()

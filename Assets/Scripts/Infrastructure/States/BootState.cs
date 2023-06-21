@@ -31,7 +31,7 @@ namespace Infrastructure.States
 
         private void EnterLoadLevel()
         {
-            _gameStateMachine.Enter<LoadLevelState>();
+            _gameStateMachine.Enter<LoadLevelState, string>("GameScene");
         }
 
         private void RegisterServices()

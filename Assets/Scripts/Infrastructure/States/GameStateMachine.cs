@@ -6,23 +6,42 @@ namespace Infrastructure.States
 {
     public class GameStateMachine
     {
-        private Dictionary<Type, IState> _states;
-        private IState _activeState;
+        private Dictionary<Type, IExitableState> _states;
+        private IExitableState _activeState;
 
         public GameStateMachine(AllServices services, ICoroutineRunner coroutineRunner)
         {
-            _states = new Dictionary<Type, IState>()
+            _states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(BootState)] = new BootState(services, coroutineRunner, this),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<SceneLoader>()),
             };
         }
-        public void Enter<TState>() where TState : IState
+        public void Enter<TState>() where TState : class, IState
+        {
+            IState state = ChangeState<TState>();
+            state.Enter();
+        }
+
+        public void Enter<TState, TPayload>(TPayload payload) where TState: class, IPayloadedState<TPayload>
+        {
+            TState state = ChangeState<TState>();
+            state.Enter(payload);
+        }
+
+        private TState ChangeState<TState>() where TState : class, IExitableState
         {
             _activeState?.Exit();
-            IState state = _states[typeof(TState)];
+
+            TState state = GetState<TState>();
             _activeState = state;
-            state.Enter();
+
+            return state;
+        }
+
+        private TState GetState<TState>() where TState : class, IExitableState
+        {
+            return _states[typeof(TState)] as TState;
         }
     }
 
