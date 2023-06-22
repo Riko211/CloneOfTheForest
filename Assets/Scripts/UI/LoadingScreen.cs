@@ -21,7 +21,7 @@ namespace UI
 
         public void HideLoadingScreen()
         {
-            FadeIn();
+            StartCoroutine(FadeIn());
         }
 
         private IEnumerator FadeIn()

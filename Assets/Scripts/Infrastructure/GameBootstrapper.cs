@@ -15,6 +15,11 @@ namespace Infrastructure
         private void Awake()
         {
             Instance = this;
+
+            GameObject loadingScreen = Resources.Load<GameObject>("UI/LoadingScreen");
+            GameObject screen = Instantiate(loadingScreen);
+            _screen = screen.GetComponent<LoadingScreen>();
+
             StateMachine = new GameStateMachine(new AllServices(), _screen, this);
             StateMachine.Enter<BootState>();
 

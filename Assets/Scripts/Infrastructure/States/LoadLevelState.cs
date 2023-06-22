@@ -9,7 +9,7 @@ namespace Infrastructure.States
         private const string InitialPointTag = "InitialPoint";
         private const string HeroPath = "Hero/hero";
         private readonly GameStateMachine _gameStateMachine;
-        private readonly LoadingScreen _loadingScreen;
+        private LoadingScreen _loadingScreen;
         private readonly AllServices _services;
 
         public LoadLevelState(AllServices services, LoadingScreen loadingScreen, GameStateMachine gameStateMachine)
@@ -21,7 +21,7 @@ namespace Infrastructure.States
 
         public void Enter(string sceneName)
         {
-            //_loadingScreen.ShowLoadingScreen();
+            _loadingScreen.ShowLoadingScreen();
             _services.Single<SceneLoader>().Load(sceneName, onLoaded);
         }
         
@@ -46,7 +46,7 @@ namespace Infrastructure.States
         
         public void Exit()
         {
-            //_loadingScreen.HideLoadingScreen();
+            _loadingScreen.HideLoadingScreen();
         }
     }
 }
