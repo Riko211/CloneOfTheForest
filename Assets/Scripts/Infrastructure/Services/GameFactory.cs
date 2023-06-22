@@ -1,24 +1,19 @@
+using Constants;
 using UnityEngine;
 
 namespace Infrastructure.Services
 {
     public class GameFactory : IService
     {
-        private const string HeroPath = "Hero/hero";
+        private readonly AssetProvider _assetProvider;
 
+        public GameFactory(AssetProvider assetProvider)
+        {
+            _assetProvider = assetProvider;
+        }
         public void CreateHero(GameObject at)
         {
-            GameObject hero = Instantiate(HeroPath, at: at.transform.position);
-        }
-        private static GameObject Instantiate(string path)
-        {
-            var prefab = Resources.Load<GameObject>(path);
-            return Object.Instantiate(prefab);
-        }
-        private static GameObject Instantiate(string path, Vector3 at)
-        {
-            var prefab = Resources.Load<GameObject>(path);
-            return Object.Instantiate(prefab, at, Quaternion.identity);
+            GameObject hero = _assetProvider.Instantiate(AssetPath.HeroPath, at: at.transform.position);
         }
     }
 }

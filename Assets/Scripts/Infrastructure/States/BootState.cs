@@ -37,7 +37,8 @@ namespace Infrastructure.States
         private void RegisterServices()
         {
             _services.RegisterSingle<SceneLoader>(new SceneLoader(_coroutineRunner));
-            _services.RegisterSingle<GameFactory>(new GameFactory());
+            _services.RegisterSingle<AssetProvider>(new AssetProvider());
+            _services.RegisterSingle<GameFactory>(new GameFactory(_services.Single<AssetProvider>()));
         }
 
         private void LockFPS()
