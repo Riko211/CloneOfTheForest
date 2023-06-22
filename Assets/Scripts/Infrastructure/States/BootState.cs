@@ -17,14 +17,14 @@ namespace Infrastructure.States
         {
             _services = services;
             _coroutineRunner = coroutineRunner;
-            _gameStateMachine = gameStateMachine;       
+            _gameStateMachine = gameStateMachine;
+
+            RegisterServices();
+            LockFPS();
         }
 
         public void Enter()
         {
-            LockFPS();
-            RegisterServices();
-
             _sceneLoader = _services.Single<SceneLoader>();
             _sceneLoader.Load(Initial, onLoaded: EnterLoadLevel);
         }
@@ -37,6 +37,7 @@ namespace Infrastructure.States
         private void RegisterServices()
         {
             _services.RegisterSingle<SceneLoader>(new SceneLoader(_coroutineRunner));
+            _services.RegisterSingle<GameFactory>(new GameFactory());
         }
 
         private void LockFPS()

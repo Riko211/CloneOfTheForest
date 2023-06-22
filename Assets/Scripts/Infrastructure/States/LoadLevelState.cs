@@ -7,41 +7,33 @@ namespace Infrastructure.States
     public class LoadLevelState : IPayloadedState<string>
     {
         private const string InitialPointTag = "InitialPoint";
-        private const string HeroPath = "Hero/hero";
+
         private readonly GameStateMachine _gameStateMachine;
         private LoadingScreen _loadingScreen;
+        private readonly SceneLoader _sceneLoader;
         private readonly AllServices _services;
+        private readonly GameFactory _gameFactory;
 
-        public LoadLevelState(AllServices services, LoadingScreen loadingScreen, GameStateMachine gameStateMachine)
+        public LoadLevelState(GameStateMachine gameStateMachine, SceneLoader sceneLoader, GameFactory gameFactory, LoadingScreen loadingScreen)
         {
-            _services = services;
             _gameStateMachine = gameStateMachine;
             _loadingScreen = loadingScreen;
+            _sceneLoader = sceneLoader;
+            _gameFactory = gameFactory;          
         }
 
         public void Enter(string sceneName)
         {
             _loadingScreen.ShowLoadingScreen();
-            _services.Single<SceneLoader>().Load(sceneName, onLoaded);
+            _sceneLoader.Load(sceneName, onLoaded);
         }
         
         private void onLoaded()
         {
             var InitialPoint = GameObject.FindWithTag(InitialPointTag);
-            GameObject hero = Instantiate(HeroPath, at: InitialPoint.transform.position);
+            _gameFactory.CreateHero(InitialPoint);
 
             _gameStateMachine.Enter<GameFlowState>();
-        }
-
-        private static GameObject Instantiate(string path)
-        {
-            var prefab = Resources.Load<GameObject>(path);
-            return Object.Instantiate(prefab);
-        }
-        private static GameObject Instantiate(string path, Vector3 at)
-        {
-            var prefab = Resources.Load<GameObject>(path);
-            return Object.Instantiate(prefab, at, Quaternion.identity);
         }
         
         public void Exit()

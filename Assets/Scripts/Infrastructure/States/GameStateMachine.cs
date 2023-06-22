@@ -16,7 +16,7 @@ namespace Infrastructure.States
             _states = new Dictionary<Type, IExitableState>()
             {
                 [typeof(BootState)] = new BootState(services, coroutineRunner, this),
-                [typeof(LoadLevelState)] = new LoadLevelState(services, loadingScreen, this),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<SceneLoader>(), services.Single<GameFactory>(), loadingScreen),
                 [typeof(GameFlowState)] = new GameFlowState(this),
             };
         }
