@@ -16,7 +16,7 @@ namespace Player
         private Transform _playerHead;
 
         [SerializeField]
-        private float _mouseSensitivity = 100f;
+        private float _mouseSensitivity = 1f;
 
         [SerializeField]
         private float _normalMoveSpeed = 2.8f;
@@ -43,6 +43,7 @@ namespace Player
             InputMove();
 
             PlayerRotation();
+            PlayerMovement();
         }
         private void InputMove()
         {

@@ -218,9 +218,9 @@ GameObject:
   - component: {fileID: 7972720512665558046}
   - component: {fileID: 1812803823412717871}
   - component: {fileID: 8549725077260558019}
+  - component: {fileID: 7599689633779636234}
   - component: {fileID: 4860422835486362873}
   - component: {fileID: 2302236380503503735}
-  - component: {fileID: 3725829558189956991}
   m_Layer: 0
   m_Name: hero
   m_TagString: Untagged
@@ -311,9 +311,23 @@ MonoBehaviour:
   _charController: {fileID: 4860422835486362873}
   _playerBody: {fileID: 304290604109328439}
   _playerHead: {fileID: 6133775868174381819}
-  _mouseSensitivity: 100
+  _mouseSensitivity: 0.3
   _normalMoveSpeed: 2.8
   _sprintMultiplier: 2
+--- !u!114 &7599689633779636234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8914555734359368592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 126c28bbcf62eeb4a9a5e201b037df99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 4860422835486362873}
+  fallSpeed: -9.81
 --- !u!143 &4860422835486362873
 CharacterController:
   m_ObjectHideFlags: 0
@@ -363,30 +377,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &3725829558189956991
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8914555734359368592}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
