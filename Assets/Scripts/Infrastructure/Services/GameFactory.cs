@@ -15,5 +15,9 @@ namespace Infrastructure.Services
         {
             GameObject hero = _assetProvider.Instantiate(AssetPath.HeroPath, at: at.transform.position);
         }
+        public GameObject CreateInputSystem()
+        {
+            return _assetProvider.Instantiate(AssetPath.InputSystemPath);
+        }
     }
 }
