@@ -218,8 +218,7 @@ GameObject:
   - component: {fileID: 7972720512665558046}
   - component: {fileID: 1812803823412717871}
   - component: {fileID: 8549725077260558019}
-  - component: {fileID: 7599689633779636234}
-  - component: {fileID: 4860422835486362873}
+  - component: {fileID: 6006708258294982893}
   - component: {fileID: 2302236380503503735}
   m_Layer: 0
   m_Name: hero
@@ -308,27 +307,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3faf53d55bdd6b4da9667b8ed62f604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _charController: {fileID: 4860422835486362873}
+  _charController: {fileID: 6006708258294982893}
+  _rigidbody: {fileID: 0}
   _playerBody: {fileID: 304290604109328439}
   _playerHead: {fileID: 6133775868174381819}
   _mouseSensitivity: 0.3
-  _normalMoveSpeed: 2.8
+  _normalMoveSpeed: 5
   _sprintMultiplier: 2
---- !u!114 &7599689633779636234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8914555734359368592}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 126c28bbcf62eeb4a9a5e201b037df99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 4860422835486362873}
-  fallSpeed: -9.81
---- !u!143 &4860422835486362873
+--- !u!143 &6006708258294982893
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

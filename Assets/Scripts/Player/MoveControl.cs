@@ -9,6 +9,8 @@ namespace Player
     {
         [SerializeField]
         private CharacterController _charController;
+        [SerializeField]
+        private Rigidbody _rigidbody;
 
         [SerializeField]
         private Transform _playerBody;
@@ -21,12 +23,21 @@ namespace Player
         [SerializeField]
         private float _normalMoveSpeed = 2.8f;
         [SerializeField]
+        private float _inertiaCoef = 0.07f;
+        [SerializeField]
         private float _sprintMultiplier;
+
+        [SerializeField]
+        private float _playerHeight = 2f;
+        [SerializeField]
+        private LayerMask _whatIsGround;
+        [SerializeField]
+        private bool _isGrounded;
 
         private InputSystem _inputSystem;
 
         private float _curSpeedMultiplier = 1f;
-        private Vector3 _currSpeed;
+        private Vector3 _curSpeed;
         private float _mouseX, _mouseY;
         private float _xMove, _zMove;
         private Vector2 _mouseDelta;
@@ -42,8 +53,10 @@ namespace Player
             InputMouseMove();
             InputMove();
 
+            GroundCheck();
             PlayerRotation();
             PlayerMovement();
+
         }
         private void InputMove()
         {
@@ -65,25 +78,17 @@ namespace Player
 
             _playerHead.transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
         }
+
         private void PlayerMovement()
         {
-            //Vector3 moveDir = CalculateMove(_sprint);
-            Vector3 moveDir = transform.right * _xMove + transform.forward * _zMove;
-
-            _currSpeed = moveDir * _normalMoveSpeed * _curSpeedMultiplier;
-
-            //if (_currSpeed.magnitude > 0) AdjustFootstepsAudio(_curSpeedMultiplier);
-            //else AdjustFootstepsAudio(_curSpeedMultiplier, true);
-            _charController.Move(_currSpeed * Time.deltaTime);
+            Vector3 moveDirection = transform.forward * _zMove + transform.right * _xMove;
+            _curSpeed = Vector3.Lerp(_curSpeed, moveDirection.normalized * _normalMoveSpeed * Time.deltaTime, _inertiaCoef);
+            _charController.Move(_curSpeed);
         }
-        private Vector3 CalculateMove(bool sprint)
+
+        private void GroundCheck()
         {
-            if (sprint) _curSpeedMultiplier = _sprintMultiplier;
-
-            else _curSpeedMultiplier = 1f;
-
-            Vector3 result = transform.right * _xMove + transform.forward * _zMove;
-            return result;
+            _isGrounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight / 2 + 0.2f, _whatIsGround);
         }
     }
 }
