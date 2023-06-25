@@ -347,6 +347,7 @@ MonoBehaviour:
   _normalMoveSpeed: 3
   _inertiaCoef: 5
   _sprintMultiplier: 2
+  _jumpForce: 4
   _playerWidht: 0.5
   _whatIsGround:
     serializedVersion: 2

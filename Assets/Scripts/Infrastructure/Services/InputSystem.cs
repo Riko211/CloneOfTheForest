@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,8 @@ namespace Infrastructure.Services
     {
         public Vector2 Axis { get; private set; }
         public Vector2 CameraAxis { get; private set; }
+
+        public Action JumpAction;
 
         private MainInputAction _mainInputAction;
 
@@ -32,7 +35,11 @@ namespace Infrastructure.Services
 
         private void BindFuncs()
         {
-
+            _mainInputAction.Player.Jump.performed += JumpCallBack;
+        }
+        private void JumpCallBack(InputAction.CallbackContext obj)
+        {
+            if (JumpAction != null) JumpAction.Invoke();
         }
     }
 }

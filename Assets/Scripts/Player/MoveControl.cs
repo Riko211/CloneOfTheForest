@@ -26,6 +26,8 @@ namespace Player
         private float _inertiaCoef = 0.07f;
         [SerializeField]
         private float _sprintMultiplier;
+        [SerializeField]
+        private float _jumpForce = 4f;
 
         [SerializeField]
         private float _playerWidht = 0.5f;
@@ -36,6 +38,7 @@ namespace Player
         [SerializeField]
         private float _gravitation = 9.81f;
 
+
         private InputSystem _inputSystem;
 
         private float _curSpeedMultiplier = 1f;
@@ -45,10 +48,17 @@ namespace Player
         private Vector2 _mouseDelta;
         private float _xRotation = 0f;
         private Vector3 _moveDirection;
+        private bool _jumpLock;
 
         private void Start()
         {
             _inputSystem = AllServices.Container.Single<InputSystem>();
+
+            _inputSystem.JumpAction += Jump;
+        }
+        private void OnDestroy()
+        {
+            _inputSystem.JumpAction -= Jump;
         }
 
         private void Update()
@@ -90,7 +100,7 @@ namespace Player
         }
         private void CalculateGravitation()
         {
-            if (_isGrounded)
+            if (_isGrounded && !_jumpLock)
             {
                 _yMove = -2f;
                 _charController.Move(new Vector3(0, _yMove, 0) * Time.deltaTime);
@@ -101,6 +111,20 @@ namespace Player
                 _charController.Move(new Vector3(0, _yMove, 0) * Time.deltaTime);
             }
 
+        }
+        private void Jump()
+        {
+            if (_isGrounded && !_jumpLock)
+            {
+                _jumpLock = true;
+                StartCoroutine(nameof(JumpUnlock));
+                _yMove = _jumpForce;
+            }
+        }
+        private IEnumerator JumpUnlock()
+        {
+            yield return new WaitForSeconds(0.3f);
+            _jumpLock = false;
         }
         private void GroundCheck()
         {
