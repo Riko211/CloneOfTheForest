@@ -308,12 +308,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _charController: {fileID: 6006708258294982893}
-  _rigidbody: {fileID: 0}
   _playerBody: {fileID: 304290604109328439}
   _playerHead: {fileID: 6133775868174381819}
   _mouseSensitivity: 0.3
-  _normalMoveSpeed: 5
+  _normalMoveSpeed: 3
+  _inertiaCoef: 5
   _sprintMultiplier: 2
+  _playerHeight: 2
+  _whatIsGround:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  _isGrounded: 0
 --- !u!143 &6006708258294982893
 CharacterController:
   m_ObjectHideFlags: 0

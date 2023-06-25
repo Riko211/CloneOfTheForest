@@ -9,8 +9,6 @@ namespace Player
     {
         [SerializeField]
         private CharacterController _charController;
-        [SerializeField]
-        private Rigidbody _rigidbody;
 
         [SerializeField]
         private Transform _playerBody;
@@ -42,6 +40,7 @@ namespace Player
         private float _xMove, _zMove;
         private Vector2 _mouseDelta;
         private float _xRotation = 0f;
+        private Vector3 _moveDirection;
 
         private void Start()
         {
@@ -56,7 +55,6 @@ namespace Player
             GroundCheck();
             PlayerRotation();
             PlayerMovement();
-
         }
         private void InputMove()
         {
@@ -81,11 +79,10 @@ namespace Player
 
         private void PlayerMovement()
         {
-            Vector3 moveDirection = transform.forward * _zMove + transform.right * _xMove;
-            _curSpeed = Vector3.Lerp(_curSpeed, moveDirection.normalized * _normalMoveSpeed * Time.deltaTime, _inertiaCoef);
-            _charController.Move(_curSpeed);
+            _moveDirection = transform.forward * _zMove + transform.right * _xMove;
+            _curSpeed = Vector3.Lerp(_curSpeed, _moveDirection.normalized * _normalMoveSpeed, _inertiaCoef * Time.deltaTime);
+            _charController.Move(_curSpeed * Time.deltaTime);
         }
-
         private void GroundCheck()
         {
             _isGrounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight / 2 + 0.2f, _whatIsGround);
