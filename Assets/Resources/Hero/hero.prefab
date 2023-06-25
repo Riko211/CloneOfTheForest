@@ -32,6 +32,37 @@ Transform:
   - {fileID: 3194117253448829635}
   m_Father: {fileID: 304290604109328439}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4195061105709897439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3223640100872405566}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3223640100872405566
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4195061105709897439}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.637, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 304290604109328439}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5198021696500276068
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +251,7 @@ GameObject:
   - component: {fileID: 8549725077260558019}
   - component: {fileID: 6006708258294982893}
   - component: {fileID: 2302236380503503735}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hero
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,6 +272,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6133775868174381819}
+  - {fileID: 3223640100872405566}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7972720512665558046
@@ -310,15 +342,17 @@ MonoBehaviour:
   _charController: {fileID: 6006708258294982893}
   _playerBody: {fileID: 304290604109328439}
   _playerHead: {fileID: 6133775868174381819}
+  _groundCheckPoint: {fileID: 3223640100872405566}
   _mouseSensitivity: 0.3
   _normalMoveSpeed: 3
   _inertiaCoef: 5
   _sprintMultiplier: 2
-  _playerHeight: 2
+  _playerWidht: 0.5
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
   _isGrounded: 0
+  _gravitation: 9.81
 --- !u!143 &6006708258294982893
 CharacterController:
   m_ObjectHideFlags: 0
@@ -340,7 +374,7 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
+  m_SlopeLimit: 55
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001

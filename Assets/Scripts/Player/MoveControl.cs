@@ -14,6 +14,8 @@ namespace Player
         private Transform _playerBody;
         [SerializeField]
         private Transform _playerHead;
+        [SerializeField]
+        private Transform _groundCheckPoint;
 
         [SerializeField]
         private float _mouseSensitivity = 1f;
@@ -26,18 +28,20 @@ namespace Player
         private float _sprintMultiplier;
 
         [SerializeField]
-        private float _playerHeight = 2f;
+        private float _playerWidht = 0.5f;
         [SerializeField]
         private LayerMask _whatIsGround;
         [SerializeField]
         private bool _isGrounded;
+        [SerializeField]
+        private float _gravitation = 9.81f;
 
         private InputSystem _inputSystem;
 
         private float _curSpeedMultiplier = 1f;
         private Vector3 _curSpeed;
         private float _mouseX, _mouseY;
-        private float _xMove, _zMove;
+        private float _xMove, _yMove, _zMove;
         private Vector2 _mouseDelta;
         private float _xRotation = 0f;
         private Vector3 _moveDirection;
@@ -54,6 +58,7 @@ namespace Player
 
             GroundCheck();
             PlayerRotation();
+            CalculateGravitation();
             PlayerMovement();
         }
         private void InputMove()
@@ -83,9 +88,26 @@ namespace Player
             _curSpeed = Vector3.Lerp(_curSpeed, _moveDirection.normalized * _normalMoveSpeed, _inertiaCoef * Time.deltaTime);
             _charController.Move(_curSpeed * Time.deltaTime);
         }
+        private void CalculateGravitation()
+        {
+            if (_isGrounded)
+            {
+                _yMove = -2f;
+                _charController.Move(new Vector3(0, _yMove, 0) * Time.deltaTime);
+            }
+            else
+            {
+                _yMove -= _gravitation * Time.deltaTime;
+                _charController.Move(new Vector3(0, _yMove, 0) * Time.deltaTime);
+            }
+
+        }
         private void GroundCheck()
         {
-            _isGrounded = Physics.Raycast(transform.position, Vector3.down, _playerHeight / 2 + 0.2f, _whatIsGround);
+            //if (Physics.OverlapSphere(transform.position, _playerWidht, _whatIsGround).Length > 0) _isGrounded = true;
+            //else _isGrounded = false;
+            if (_charController.isGrounded || Physics.CheckSphere(_groundCheckPoint.position, _playerWidht, _whatIsGround)) _isGrounded = true;
+            else _isGrounded = false;
         }
     }
 }
