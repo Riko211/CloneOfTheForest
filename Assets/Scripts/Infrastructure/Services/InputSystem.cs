@@ -9,6 +9,8 @@ namespace Infrastructure.Services
         public Vector2 Axis { get; private set; }
         public Vector2 CameraAxis { get; private set; }
 
+        public Vector2 MousePosition { get; private set; }
+
         public Action JumpAction;
 
         private MainInputAction _mainInputAction;
@@ -31,6 +33,7 @@ namespace Infrastructure.Services
         {
             Axis = _mainInputAction.Player.Movement.ReadValue<Vector2>();
             CameraAxis = _mainInputAction.Player.Camera.ReadValue<Vector2>();
+            MousePosition = _mainInputAction.Player.MousePos.ReadValue<Vector2>();
         }
 
         private void BindFuncs()
