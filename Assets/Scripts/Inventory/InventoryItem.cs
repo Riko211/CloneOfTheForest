@@ -15,12 +15,17 @@ namespace Inventory
         private Image _image;
 
         private Transform _parentAfterDrag;
-        //private InputSystem _inputSystem;
+        private InputSystem _inputSystem;
 
         private void Start()
         {
-            InitializeItem(_itemData);
-            //_inputSystem = AllServices.Container.Single<InputSystem>();
+            //InitializeItem(_itemData);
+            _inputSystem = AllServices.Container.Single<InputSystem>();
+        }
+        public void InitializeItem(InventoryItemSO itemData)
+        {
+            _itemData = itemData;
+            _image.sprite = itemData.image;
         }
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -31,8 +36,8 @@ namespace Inventory
 
         public void OnDrag(PointerEventData eventData)
         {
-            //transform.position = _inputSystem.MousePosition;
-            transform.position = Input.mousePosition;
+            transform.position = _inputSystem.MousePosition;
+            //transform.position = Input.mousePosition;
         }
 
         public void OnEndDrag(PointerEventData eventData)
@@ -44,12 +49,6 @@ namespace Inventory
         public void SetParent(Transform parent)
         {
             _parentAfterDrag = parent;
-        }
-
-        private void InitializeItem(InventoryItemSO itemData)
-        {
-            //_itemData = itemData;
-            _image.sprite = itemData.image;
         }
     }
 }
