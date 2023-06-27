@@ -11,7 +11,7 @@ namespace Infrastructure.Services
 
         public Vector2 MousePosition { get; private set; }
 
-        public Action JumpAction;
+        public Action JumpAction, OpenInventoryAction;
 
         private MainInputAction _mainInputAction;
 
@@ -39,10 +39,15 @@ namespace Infrastructure.Services
         private void BindFuncs()
         {
             _mainInputAction.Player.Jump.performed += JumpCallBack;
+            _mainInputAction.Player.OpenInventory.performed += OpenInventoryCallBack;
         }
         private void JumpCallBack(InputAction.CallbackContext obj)
         {
             if (JumpAction != null) JumpAction.Invoke();
+        }
+        private void OpenInventoryCallBack(InputAction.CallbackContext obj)
+        {
+            if (OpenInventoryAction != null) OpenInventoryAction.Invoke();
         }
     }
 }
