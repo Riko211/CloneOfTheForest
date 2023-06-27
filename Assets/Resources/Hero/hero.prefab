@@ -376,8 +376,13 @@ MonoBehaviour:
   - {fileID: 7655264746572010982}
   - {fileID: 3114731429098815567}
   _mainInventoryGroup: {fileID: 1241425343359053147}
+  _inventoryRoot: {fileID: 7171575927127985993}
   _inventoryItemPrefab: {fileID: 3420606057023034817, guid: 27c337c85b3637441920ddf1662bbe94,
     type: 3}
+  _itemData:
+  - {fileID: 11400000, guid: 2bc0fc78cb522d2438e51afae1603d07, type: 2}
+  - {fileID: 11400000, guid: 9d28afb1cf0a77d41b792c9cbabc6d52, type: 2}
+  - {fileID: 11400000, guid: cd841c3be4f8c8c44a0f2120004818f3, type: 2}
 --- !u!114 &8549725077260558019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,10 +410,6 @@ MonoBehaviour:
     m_Bits: 55
   _isGrounded: 0
   _gravitation: 9.81
-  _itemsData:
-  - {fileID: 11400000, guid: 2bc0fc78cb522d2438e51afae1603d07, type: 2}
-  - {fileID: 11400000, guid: 9d28afb1cf0a77d41b792c9cbabc6d52, type: 2}
-  - {fileID: 11400000, guid: cd841c3be4f8c8c44a0f2120004818f3, type: 2}
 --- !u!143 &6006708258294982893
 CharacterController:
   m_ObjectHideFlags: 0

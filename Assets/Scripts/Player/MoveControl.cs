@@ -50,6 +50,7 @@ namespace Player
         private Vector3 _moveDirection;
         private bool _jumpLock;
 
+
         private void Start()
         {
             _inputSystem = AllServices.Container.Single<InputSystem>();
@@ -67,8 +68,9 @@ namespace Player
             InputMove();
 
             GroundCheck();
-            PlayerRotation();
             CalculateGravitation();
+
+            PlayerRotation();
             PlayerMovement();
         }
         private void InputMove()

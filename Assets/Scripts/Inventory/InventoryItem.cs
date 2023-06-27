@@ -16,22 +16,26 @@ namespace Inventory
 
         private Transform _parentAfterDrag;
         private InputSystem _inputSystem;
+        private Transform _inventoryRoot;
 
         private void Start()
         {
             //InitializeItem(_itemData);
             _inputSystem = AllServices.Container.Single<InputSystem>();
         }
-        public void InitializeItem(InventoryItemSO itemData)
+        public void InitializeItem(InventoryItemSO itemData, Transform rootTransform)
         {
             _itemData = itemData;
             _image.sprite = itemData.image;
+            _inventoryRoot = rootTransform;
         }
         public void OnBeginDrag(PointerEventData eventData)
         {
             _image.raycastTarget = false;
             _parentAfterDrag = transform.parent;
-            transform.SetParent(transform.root);
+            transform.SetParent(_inventoryRoot);
+
+            Debug.Log("Drag begin");
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -44,6 +48,8 @@ namespace Inventory
         {
             _image.raycastTarget = true;
             transform.SetParent(_parentAfterDrag);
+
+            Debug.Log("End drag");
         }
         
         public void SetParent(Transform parent)

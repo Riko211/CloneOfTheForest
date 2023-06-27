@@ -12,8 +12,10 @@ namespace Infrastructure.Services
         public Vector2 MousePosition { get; private set; }
 
         public Action JumpAction, OpenInventoryAction;
+        public bool IsControlLocked { get; private set; }
 
         private MainInputAction _mainInputAction;
+
 
         private void Awake()
         {
@@ -31,9 +33,13 @@ namespace Infrastructure.Services
 
         private void ReadControls()
         {
-            Axis = _mainInputAction.Player.Movement.ReadValue<Vector2>();
-            CameraAxis = _mainInputAction.Player.Camera.ReadValue<Vector2>();
+            if (!IsControlLocked)
+            {
+                Axis = _mainInputAction.Player.Movement.ReadValue<Vector2>();
+                CameraAxis = _mainInputAction.Player.Camera.ReadValue<Vector2>();
+            }
             MousePosition = _mainInputAction.Player.MousePos.ReadValue<Vector2>();
+
         }
 
         private void BindFuncs()
@@ -41,13 +47,24 @@ namespace Infrastructure.Services
             _mainInputAction.Player.Jump.performed += JumpCallBack;
             _mainInputAction.Player.OpenInventory.performed += OpenInventoryCallBack;
         }
-        private void JumpCallBack(InputAction.CallbackContext obj)
+        public void JumpCallBack(InputAction.CallbackContext obj)
         {
             if (JumpAction != null) JumpAction.Invoke();
         }
-        private void OpenInventoryCallBack(InputAction.CallbackContext obj)
+        public void OpenInventoryCallBack(InputAction.CallbackContext obj)
         {
             if (OpenInventoryAction != null) OpenInventoryAction.Invoke();
+        }
+
+        public void LockControl()
+        {
+            IsControlLocked = true;
+            Axis = Vector2.zero;
+            CameraAxis = Vector2.zero;
+        }
+        public void UnockControl()
+        {
+            IsControlLocked = false;
         }
     }
 }

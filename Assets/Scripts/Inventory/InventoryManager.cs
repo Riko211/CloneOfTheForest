@@ -11,12 +11,17 @@ namespace Inventory
         private InventorySlot[] _inventorySlots;
         [SerializeField]
         private GameObject _mainInventoryGroup;
+        [SerializeField, Tooltip("Inventory canvas")]
+        private Transform _inventoryRoot;
         [SerializeField]
         private GameObject _inventoryItemPrefab;
 
         private bool _isOpened = false;
 
         private InputSystem _inputSystem;
+
+        [SerializeField]
+        private InventoryItemSO[] _itemData;
 
 
         private void Start()
@@ -44,24 +49,30 @@ namespace Inventory
         {
             GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlot.transform);
             InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
-            inventoryItem.InitializeItem(itemData);
+            inventoryItem.InitializeItem(itemData, _inventoryRoot);
         }
         private void ChangeInventoryState()
         {
-            if (_isOpened) OpenInventory();
+            if (!_isOpened) OpenInventory();
             else CloseInventory();
         }
 
         private void CloseInventory()
         {
-            _mainInventoryGroup.SetActive(true);
-            _isOpened = true;
+            _mainInventoryGroup.SetActive(false);
+            _isOpened = false;
+
+            _inputSystem.UnockControl();
         }
 
         private void OpenInventory()
         {
-            _mainInventoryGroup.SetActive(false);
-            _isOpened = false;
+            _inputSystem.LockControl();
+
+            _mainInventoryGroup.SetActive(true);
+            _isOpened = true;
+
+            AddItemToInventory(_itemData[Random.Range(0, _itemData.Length)]);
         }
     }
 }
