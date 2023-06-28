@@ -17,6 +17,7 @@ namespace Inventory
         private GameObject _inventoryItemPrefab;
 
         private bool _isOpened = false;
+        private int _selectedSlot = -1;
 
         private InputSystem _inputSystem;
 
@@ -31,6 +32,12 @@ namespace Inventory
             _inputSystem = AllServices.Container.Single<InputSystem>();
 
             _inputSystem.OpenInventoryAction += ChangeInventoryState;
+            _inputSystem.ToolbarAction += ChangeSelectedSlot;
+        }
+        private void OnDestroy()
+        {
+            _inputSystem.OpenInventoryAction -= ChangeInventoryState;
+            _inputSystem.ToolbarAction -= ChangeSelectedSlot;
         }
         public bool AddItemToInventory(InventoryItemSO itemData)
         {
@@ -57,6 +64,12 @@ namespace Inventory
             }
 
             return false;
+        }
+        private void ChangeSelectedSlot(int newSlot)
+        {
+            if (_selectedSlot >= 0) _inventorySlots[_selectedSlot].DeselectSlot();
+            _inventorySlots[newSlot - 1].SelectSlot();
+            _selectedSlot = newSlot - 1;
         }
         private void SpawnItemInSlot(InventoryItemSO itemData, InventorySlot inventorySlot)
         {

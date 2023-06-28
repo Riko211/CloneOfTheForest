@@ -71,6 +71,15 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Toolbar"",
+                    ""type"": ""Button"",
+                    ""id"": ""95d83782-0b27-440e-99c8-f2f713058e0a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,6 +192,94 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""OpenInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c86d4f2d-8d07-4e2f-8776-f2ba131349c9"",
+                    ""path"": ""<Keyboard>/#(1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toolbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""587500d1-6ac7-49e6-bce9-e35f39c9f3c1"",
+                    ""path"": ""<Keyboard>/#(2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toolbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16274b9d-d7f5-43ca-b0eb-aa84b5dff40e"",
+                    ""path"": ""<Keyboard>/#(3)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toolbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b05fd2b9-b919-4469-9ef3-67bc8fb170e1"",
+                    ""path"": ""<Keyboard>/#(4)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toolbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b09cef70-1525-475b-a342-847624f0e702"",
+                    ""path"": ""<Keyboard>/#(5)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toolbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da7510da-44dd-43d3-96ea-e657f1ef2bc6"",
+                    ""path"": ""<Keyboard>/#(6)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toolbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f33e27a-2b38-4658-bd3e-2b3a9e6b3a0b"",
+                    ""path"": ""<Keyboard>/#(7)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toolbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1211cd8c-1ff6-4a6f-a027-abe8836d4d86"",
+                    ""path"": ""<Keyboard>/#(8)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toolbar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -202,6 +299,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         m_Player_OpenInventory = m_Player.FindAction("OpenInventory", throwIfNotFound: true);
+        m_Player_Toolbar = m_Player.FindAction("Toolbar", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -268,6 +366,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_MousePos;
     private readonly InputAction m_Player_OpenInventory;
+    private readonly InputAction m_Player_Toolbar;
     public struct PlayerActions
     {
         private @MainInputAction m_Wrapper;
@@ -277,6 +376,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         public InputAction @OpenInventory => m_Wrapper.m_Player_OpenInventory;
+        public InputAction @Toolbar => m_Wrapper.m_Player_Toolbar;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -301,6 +401,9 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @OpenInventory.started += instance.OnOpenInventory;
             @OpenInventory.performed += instance.OnOpenInventory;
             @OpenInventory.canceled += instance.OnOpenInventory;
+            @Toolbar.started += instance.OnToolbar;
+            @Toolbar.performed += instance.OnToolbar;
+            @Toolbar.canceled += instance.OnToolbar;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -320,6 +423,9 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @OpenInventory.started -= instance.OnOpenInventory;
             @OpenInventory.performed -= instance.OnOpenInventory;
             @OpenInventory.canceled -= instance.OnOpenInventory;
+            @Toolbar.started -= instance.OnToolbar;
+            @Toolbar.performed -= instance.OnToolbar;
+            @Toolbar.canceled -= instance.OnToolbar;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -353,5 +459,6 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnMousePos(InputAction.CallbackContext context);
         void OnOpenInventory(InputAction.CallbackContext context);
+        void OnToolbar(InputAction.CallbackContext context);
     }
 }

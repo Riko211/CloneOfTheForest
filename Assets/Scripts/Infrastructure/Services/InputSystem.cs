@@ -12,6 +12,7 @@ namespace Infrastructure.Services
         public Vector2 MousePosition { get; private set; }
 
         public Action JumpAction, OpenInventoryAction;
+        public Action<int> ToolbarAction;
         public bool IsControlLocked { get; private set; }
 
         private MainInputAction _mainInputAction;
@@ -39,13 +40,13 @@ namespace Infrastructure.Services
                 CameraAxis = _mainInputAction.Player.Camera.ReadValue<Vector2>();
             }
             MousePosition = _mainInputAction.Player.MousePos.ReadValue<Vector2>();
-
         }
 
         private void BindFuncs()
         {
             _mainInputAction.Player.Jump.performed += JumpCallBack;
             _mainInputAction.Player.OpenInventory.performed += OpenInventoryCallBack;
+            _mainInputAction.Player.Toolbar.performed += ToolbarCallBack;
         }
         public void JumpCallBack(InputAction.CallbackContext obj)
         {
@@ -54,6 +55,10 @@ namespace Infrastructure.Services
         public void OpenInventoryCallBack(InputAction.CallbackContext obj)
         {
             if (OpenInventoryAction != null) OpenInventoryAction.Invoke();
+        }
+        public void ToolbarCallBack(InputAction.CallbackContext obj)
+        {
+            if (ToolbarAction != null) ToolbarAction.Invoke(int.Parse(obj.control.displayName));
         }
 
         public void LockControl()

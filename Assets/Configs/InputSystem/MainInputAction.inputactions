@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Toolbar",
+                    "type": "Button",
+                    "id": "95d83782-0b27-440e-99c8-f2f713058e0a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -159,6 +168,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "OpenInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c86d4f2d-8d07-4e2f-8776-f2ba131349c9",
+                    "path": "<Keyboard>/#(1)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toolbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "587500d1-6ac7-49e6-bce9-e35f39c9f3c1",
+                    "path": "<Keyboard>/#(2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toolbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "16274b9d-d7f5-43ca-b0eb-aa84b5dff40e",
+                    "path": "<Keyboard>/#(3)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toolbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b05fd2b9-b919-4469-9ef3-67bc8fb170e1",
+                    "path": "<Keyboard>/#(4)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toolbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b09cef70-1525-475b-a342-847624f0e702",
+                    "path": "<Keyboard>/#(5)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toolbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "da7510da-44dd-43d3-96ea-e657f1ef2bc6",
+                    "path": "<Keyboard>/#(6)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toolbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f33e27a-2b38-4658-bd3e-2b3a9e6b3a0b",
+                    "path": "<Keyboard>/#(7)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toolbar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1211cd8c-1ff6-4a6f-a027-abe8836d4d86",
+                    "path": "<Keyboard>/#(8)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Toolbar",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
