@@ -2,11 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Inventory
 {
     public class InventorySlot : MonoBehaviour, IDropHandler
     {
+        [SerializeField]
+        private Image _image;
+        [SerializeField]
+        private Color _selectedColor, _defaultColor;
+
+        private void Start()
+        {
+            _defaultColor = _image.color;
+        }
+        public void SelectSlot()
+        {
+            _image.color = _selectedColor;
+        }
+        public void DeselectSlot()
+        {
+            _image.color = _defaultColor;
+        }
         public void OnDrop(PointerEventData eventData)
         {
             if (transform.childCount == 0)
