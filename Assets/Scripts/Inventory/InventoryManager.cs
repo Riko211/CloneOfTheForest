@@ -62,7 +62,7 @@ namespace Inventory
             _mainInventoryGroup.SetActive(false);
             _isOpened = false;
 
-            _inputSystem.UnockControl();
+            _inputSystem.UnlockControl();
         }
 
         private void OpenInventory()

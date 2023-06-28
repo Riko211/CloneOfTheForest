@@ -34,27 +34,26 @@ namespace Inventory
             _image.raycastTarget = false;
             _parentAfterDrag = transform.parent;
             transform.SetParent(_inventoryRoot);
-
-            Debug.Log("Drag begin");
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             transform.position = _inputSystem.MousePosition;
-            //transform.position = Input.mousePosition;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            _image.raycastTarget = true;
-            transform.SetParent(_parentAfterDrag);
-
-            Debug.Log("End drag");
+            _image.raycastTarget = true;         
         }
         
-        public void SetParent(Transform parent)
+        public void SetSlot(Transform parent)
         {
             _parentAfterDrag = parent;
+            transform.SetParent(_parentAfterDrag);
+        }
+        public Transform GetSlot()
+        {
+            return _parentAfterDrag;
         }
     }
 }

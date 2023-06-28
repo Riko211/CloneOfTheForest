@@ -62,7 +62,7 @@ namespace Infrastructure.Services
             Axis = Vector2.zero;
             CameraAxis = Vector2.zero;
         }
-        public void UnockControl()
+        public void UnlockControl()
         {
             IsControlLocked = false;
         }

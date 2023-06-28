@@ -12,7 +12,16 @@ namespace Inventory
             if (transform.childCount == 0)
             {
                 InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
-                inventoryItem.SetParent(transform);
+                inventoryItem.SetSlot(transform);
+            }
+            else
+            {
+                InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
+                InventoryItem itemInSlot = GetComponentInChildren<InventoryItem>();
+
+                Transform previousItemSlot = inventoryItem.GetSlot();
+                itemInSlot.transform.SetParent(previousItemSlot);
+                inventoryItem.SetSlot(transform);
             }
         }
     }
