@@ -32,7 +32,7 @@ namespace Inventory
 
             _inputSystem.OpenInventoryAction += ChangeInventoryState;
         }
-        public void AddItemToInventory(InventoryItemSO itemData)
+        public bool AddItemToInventory(InventoryItemSO itemData)
         {
             for (int i = 0; i < _inventorySlots.Length; i++)
             {
@@ -41,9 +41,11 @@ namespace Inventory
                 if (itemInSlot == null)
                 {
                     SpawnItemInSlot(itemData, slot);
-                    return;
+                    return true;
                 }
             }
+
+            return false;
         }
         private void SpawnItemInSlot(InventoryItemSO itemData, InventorySlot inventorySlot)
         {
@@ -72,7 +74,8 @@ namespace Inventory
             _mainInventoryGroup.SetActive(true);
             _isOpened = true;
 
-            AddItemToInventory(_itemData[Random.Range(0, _itemData.Length)]);
+            bool isItemAdded = AddItemToInventory(_itemData[Random.Range(0, _itemData.Length)]);
+            Debug.Log("Item is added to inventory : " + isItemAdded.ToString());
         }
     }
 }
