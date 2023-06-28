@@ -38,6 +38,17 @@ namespace Inventory
             {
                 InventorySlot slot = _inventorySlots[i];
                 InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+                if (itemInSlot != null && itemInSlot.GetItemData() == itemData && itemInSlot.GetItemCount() < itemData.maxStackSize)
+                {
+                    itemInSlot.AddItem();
+                    return true;
+                }
+            }
+
+            for (int i = 0; i < _inventorySlots.Length; i++)
+            {
+                InventorySlot slot = _inventorySlots[i];
+                InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
                 if (itemInSlot == null)
                 {
                     SpawnItemInSlot(itemData, slot);

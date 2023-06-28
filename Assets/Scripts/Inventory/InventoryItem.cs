@@ -19,6 +19,7 @@ namespace Inventory
         [SerializeField]
         private int _count = 1;
 
+        private int _maxStackSize;
         private Transform _parentAfterDrag;
         private Transform _parentBeforeDrag;
         private InputSystem _inputSystem;
@@ -34,6 +35,7 @@ namespace Inventory
             _itemData = itemData;
             _image.sprite = itemData.image;
             _inventoryRoot = rootTransform;
+            _maxStackSize = itemData.maxStackSize;
             RefreshCount();
         }
         public void OnBeginDrag(PointerEventData eventData)
@@ -64,9 +66,23 @@ namespace Inventory
         {
             return _parentAfterDrag;
         }
+        public InventoryItemSO GetItemData()
+        {
+            return _itemData;
+        }
+        public int GetItemCount()
+        {
+            return _count;
+        }
+        public void AddItem()
+        {
+            _count++;
+            RefreshCount();
+        }
         private void RefreshCount()
         {
-            _countTXT.text = _count.ToString();
+            if (_count > 1) _countTXT.text = _count.ToString();
+            else _countTXT.text = "";
         }
     }
 }

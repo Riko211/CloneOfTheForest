@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Stick
   m_EditorClassIdentifier: 
   stackable: 1
+  maxStackSize: 8
   image: {fileID: 21300000, guid: 8d58029460cb73b4e85100ff2ab7cbe7, type: 3}

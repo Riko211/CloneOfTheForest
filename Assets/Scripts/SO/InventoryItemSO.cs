@@ -7,6 +7,7 @@ public class InventoryItemSO : ScriptableObject
 
     [Header("UI data")]
     public bool stackable = true;
+    public int maxStackSize = 1;
 
     [Header("Other")]
     public Sprite image;
