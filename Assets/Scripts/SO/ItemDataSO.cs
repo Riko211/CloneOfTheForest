@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable object/Item")]
-public class InventoryItemSO : ScriptableObject
+public class ItemDataSO : ScriptableObject
 {
     [Header("Gameplay data")]
 

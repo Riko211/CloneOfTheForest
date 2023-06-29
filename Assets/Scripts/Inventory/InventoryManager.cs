@@ -22,7 +22,7 @@ namespace Inventory
         private InputSystem _inputSystem;
 
         [SerializeField]
-        private InventoryItemSO[] _itemData;
+        private ItemDataSO[] _itemData;
 
 
         private void Start()
@@ -39,7 +39,7 @@ namespace Inventory
             _inputSystem.OpenInventoryAction -= ChangeInventoryState;
             _inputSystem.ToolbarAction -= ChangeSelectedSlot;
         }
-        public bool AddItemToInventory(InventoryItemSO itemData)
+        public bool AddItemToInventory(ItemDataSO itemData)
         {
             for (int i = 0; i < _inventorySlots.Length; i++)
             {
@@ -71,7 +71,7 @@ namespace Inventory
             _inventorySlots[newSlot - 1].SelectSlot();
             _selectedSlot = newSlot - 1;
         }
-        private void SpawnItemInSlot(InventoryItemSO itemData, InventorySlot inventorySlot)
+        private void SpawnItemInSlot(ItemDataSO itemData, InventorySlot inventorySlot)
         {
             GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlot.transform);
             InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();

@@ -80,6 +80,15 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemPickUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""f72bbdcb-3235-464b-a235-a31ecf35f227"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -280,6 +289,17 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""Toolbar"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba145a5a-a2f5-44fd-9946-8bdf959a7038"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemPickUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -300,6 +320,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         m_Player_MousePos = m_Player.FindAction("MousePos", throwIfNotFound: true);
         m_Player_OpenInventory = m_Player.FindAction("OpenInventory", throwIfNotFound: true);
         m_Player_Toolbar = m_Player.FindAction("Toolbar", throwIfNotFound: true);
+        m_Player_ItemPickUp = m_Player.FindAction("ItemPickUp", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -367,6 +388,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_MousePos;
     private readonly InputAction m_Player_OpenInventory;
     private readonly InputAction m_Player_Toolbar;
+    private readonly InputAction m_Player_ItemPickUp;
     public struct PlayerActions
     {
         private @MainInputAction m_Wrapper;
@@ -377,6 +399,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         public InputAction @MousePos => m_Wrapper.m_Player_MousePos;
         public InputAction @OpenInventory => m_Wrapper.m_Player_OpenInventory;
         public InputAction @Toolbar => m_Wrapper.m_Player_Toolbar;
+        public InputAction @ItemPickUp => m_Wrapper.m_Player_ItemPickUp;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -404,6 +427,9 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @Toolbar.started += instance.OnToolbar;
             @Toolbar.performed += instance.OnToolbar;
             @Toolbar.canceled += instance.OnToolbar;
+            @ItemPickUp.started += instance.OnItemPickUp;
+            @ItemPickUp.performed += instance.OnItemPickUp;
+            @ItemPickUp.canceled += instance.OnItemPickUp;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -426,6 +452,9 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @Toolbar.started -= instance.OnToolbar;
             @Toolbar.performed -= instance.OnToolbar;
             @Toolbar.canceled -= instance.OnToolbar;
+            @ItemPickUp.started -= instance.OnItemPickUp;
+            @ItemPickUp.performed -= instance.OnItemPickUp;
+            @ItemPickUp.canceled -= instance.OnItemPickUp;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -460,5 +489,6 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         void OnMousePos(InputAction.CallbackContext context);
         void OnOpenInventory(InputAction.CallbackContext context);
         void OnToolbar(InputAction.CallbackContext context);
+        void OnItemPickUp(InputAction.CallbackContext context);
     }
 }

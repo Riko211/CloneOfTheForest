@@ -11,7 +11,7 @@ namespace Inventory
     public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
         [SerializeField]
-        private InventoryItemSO _itemData;
+        private ItemDataSO _itemData;
         [SerializeField]
         private Image _image;
         [SerializeField]
@@ -30,7 +30,7 @@ namespace Inventory
             //InitializeItem(_itemData);
             _inputSystem = AllServices.Container.Single<InputSystem>();
         }
-        public void InitializeItem(InventoryItemSO itemData, Transform rootTransform)
+        public void InitializeItem(ItemDataSO itemData, Transform rootTransform)
         {
             _itemData = itemData;
             _image.sprite = itemData.image;
@@ -66,7 +66,7 @@ namespace Inventory
         {
             return _parentAfterDrag;
         }
-        public InventoryItemSO GetItemData()
+        public ItemDataSO GetItemData()
         {
             return _itemData;
         }

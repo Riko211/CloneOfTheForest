@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfbc1368eefd645409f76b770cb97f67, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d7436b2f352184409a2452a45994999, type: 3}
   m_Name: Stick
   m_EditorClassIdentifier: 
   stackable: 1
