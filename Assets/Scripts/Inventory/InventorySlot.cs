@@ -15,7 +15,7 @@ namespace Inventory
 
         private void Start()
         {
-            _defaultColor = _image.color;
+            //_defaultColor = _image.color;
         }
         public void SelectSlot()
         {

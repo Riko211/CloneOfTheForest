@@ -17,27 +17,30 @@ namespace Inventory
         private GameObject _inventoryItemPrefab;
 
         private bool _isOpened = false;
-        private int _selectedSlot = -1;
+        private int _selectedSlot = 1;
 
         private InputSystem _inputSystem;
 
         [SerializeField]
         private ItemDataSO[] _itemData;
-
+        private float _dropItemOffset = 0.75f;
 
         private void Start()
         {
             _isOpened = _mainInventoryGroup.activeSelf;
+            ChangeSelectedSlot(_selectedSlot);
 
             _inputSystem = AllServices.Container.Single<InputSystem>();
 
             _inputSystem.OpenInventoryAction += ChangeInventoryState;
             _inputSystem.ToolbarAction += ChangeSelectedSlot;
+            _inputSystem.DropItemAction += DropItem;
         }
         private void OnDestroy()
         {
             _inputSystem.OpenInventoryAction -= ChangeInventoryState;
             _inputSystem.ToolbarAction -= ChangeSelectedSlot;
+            _inputSystem.DropItemAction -= DropItem;
         }
         public bool AddItemToInventory(ItemDataSO itemData)
         {
@@ -64,6 +67,17 @@ namespace Inventory
             }
 
             return false;
+        }
+        private void DropItem()
+        {
+            InventoryItem itemForDrop = _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>();
+            if (itemForDrop != null && _selectedSlot >= 0)
+            {
+                Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, 0f, _dropItemOffset));
+                GameObject item = Instantiate(itemForDrop.GetItemData().prefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
+                item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
+                itemForDrop.RemoveItem();
+            }
         }
         private void ChangeSelectedSlot(int newSlot)
         {

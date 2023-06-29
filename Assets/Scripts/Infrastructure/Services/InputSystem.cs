@@ -11,7 +11,7 @@ namespace Infrastructure.Services
 
         public Vector2 MousePosition { get; private set; }
 
-        public Action JumpAction, OpenInventoryAction, ItemPickUpAction;
+        public Action JumpAction, OpenInventoryAction, ItemPickUpAction, DropItemAction;
         public Action<int> ToolbarAction;
         public bool IsControlLocked { get; private set; }
 
@@ -48,6 +48,7 @@ namespace Infrastructure.Services
             _mainInputAction.Player.OpenInventory.performed += OpenInventoryCallBack;
             _mainInputAction.Player.Toolbar.performed += ToolbarCallBack;
             _mainInputAction.Player.ItemPickUp.performed += ItemPickUpCallBack;
+            _mainInputAction.Player.DropItem.performed += DropItemCallBack;
         }
         public void JumpCallBack(InputAction.CallbackContext obj)
         {
@@ -64,6 +65,10 @@ namespace Infrastructure.Services
         public void ItemPickUpCallBack(InputAction.CallbackContext obj)
         {
             if (ItemPickUpAction != null) ItemPickUpAction.Invoke();
+        }
+        public void DropItemCallBack(InputAction.CallbackContext obj)
+        {
+            if (DropItemAction != null) DropItemAction.Invoke();
         }
 
         public void LockControl()

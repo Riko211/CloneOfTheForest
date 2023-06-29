@@ -67,6 +67,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "DropItem",
+                    "type": "Button",
+                    "id": "afb63bde-4e08-40c4-b1ed-5b9e12d87586",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -276,6 +285,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ItemPickUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e4e88a7-8004-486d-96bc-2aa8c027dc80",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -79,6 +79,12 @@ namespace Inventory
             _count++;
             RefreshCount();
         }
+        public void RemoveItem()
+        {
+            _count--;
+            RefreshCount();
+            if (_count <= 0) Destroy(gameObject);
+        }
         private void RefreshCount()
         {
             if (_count > 1) _countTXT.text = _count.ToString();

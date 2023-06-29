@@ -11,4 +11,5 @@ public class ItemDataSO : ScriptableObject
 
     [Header("Other")]
     public Sprite image;
+    public GameObject prefab;
 }
