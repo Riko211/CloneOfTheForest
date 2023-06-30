@@ -98,6 +98,15 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LMBClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""e2f40d61-0132-40b3-8742-8c900857bb7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -320,6 +329,17 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""DropItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2f871ec-dd69-4553-9395-ba1c3d13e51f"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LMBClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -342,6 +362,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         m_Player_Toolbar = m_Player.FindAction("Toolbar", throwIfNotFound: true);
         m_Player_ItemPickUp = m_Player.FindAction("ItemPickUp", throwIfNotFound: true);
         m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
+        m_Player_LMBClick = m_Player.FindAction("LMBClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -411,6 +432,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Toolbar;
     private readonly InputAction m_Player_ItemPickUp;
     private readonly InputAction m_Player_DropItem;
+    private readonly InputAction m_Player_LMBClick;
     public struct PlayerActions
     {
         private @MainInputAction m_Wrapper;
@@ -423,6 +445,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         public InputAction @Toolbar => m_Wrapper.m_Player_Toolbar;
         public InputAction @ItemPickUp => m_Wrapper.m_Player_ItemPickUp;
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
+        public InputAction @LMBClick => m_Wrapper.m_Player_LMBClick;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -456,6 +479,9 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @DropItem.started += instance.OnDropItem;
             @DropItem.performed += instance.OnDropItem;
             @DropItem.canceled += instance.OnDropItem;
+            @LMBClick.started += instance.OnLMBClick;
+            @LMBClick.performed += instance.OnLMBClick;
+            @LMBClick.canceled += instance.OnLMBClick;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -484,6 +510,9 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @DropItem.started -= instance.OnDropItem;
             @DropItem.performed -= instance.OnDropItem;
             @DropItem.canceled -= instance.OnDropItem;
+            @LMBClick.started -= instance.OnLMBClick;
+            @LMBClick.performed -= instance.OnLMBClick;
+            @LMBClick.canceled -= instance.OnLMBClick;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -520,5 +549,6 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         void OnToolbar(InputAction.CallbackContext context);
         void OnItemPickUp(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
+        void OnLMBClick(InputAction.CallbackContext context);
     }
 }

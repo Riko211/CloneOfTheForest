@@ -8,5 +8,6 @@ namespace Constants
     {
         public const string HeroPath = "Hero/hero";
         public const string InputSystemPath = "Infrastructure/InputSystem/InputSystem";
+        public const string TargetPath = "UI/Target";
     }
 }

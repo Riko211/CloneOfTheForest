@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d7436b2f352184409a2452a45994999, type: 3}
-  m_Name: Stone axe
+  m_Name: StoneAxe
   m_EditorClassIdentifier: 
   stackable: 0
   maxStackSize: 1
   type: 0
   image: {fileID: 21300000, guid: 865f03d295af95548af0299a5512f0de, type: 3}
-  prefab: {fileID: 1744409185664316648, guid: c5004108c30e6a24897bdc41f86125d3, type: 3}
+  collectablePrefab: {fileID: 1744409185664316648, guid: c5004108c30e6a24897bdc41f86125d3,
+    type: 3}
+  inHandPrefab: {fileID: 5599999332059713874, guid: d98e542ff0ea0e44a81c86abbec82e21,
+    type: 3}

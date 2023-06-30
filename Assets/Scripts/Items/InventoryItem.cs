@@ -85,6 +85,11 @@ namespace Inventory
             RefreshCount();
             if (_count <= 0) Destroy(gameObject);
         }
+        public bool IsItemTool()
+        {
+            if (_itemData.type == ItemDataSO.ItemType.Tool) return true;
+            else return false;
+        }
         private void RefreshCount()
         {
             if (_count > 1) _countTXT.text = _count.ToString();

@@ -19,5 +19,9 @@ namespace Infrastructure.Services
         {
             return _assetProvider.Instantiate(AssetPath.InputSystemPath);
         }
+        public void CreateTarget()
+        {
+            _assetProvider.Instantiate(AssetPath.TargetPath);
+        }
     }
 }

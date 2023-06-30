@@ -20,6 +20,7 @@ namespace Inventory
 
         private bool _isOpened = false;
         private int _selectedSlot = 1;
+        private bool _isToolInArms = false;
 
         private InputSystem _inputSystem;
 
@@ -64,6 +65,7 @@ namespace Inventory
                 if (itemInSlot == null)
                 {
                     SpawnItemInSlot(itemData, slot);
+                    if (itemData.type == ItemDataSO.ItemType.Tool && _selectedSlot == i) CreateToolInHands(itemData);
                     return true;
                 }
             }
@@ -76,15 +78,16 @@ namespace Inventory
             if (itemForDrop != null && _selectedSlot >= 0)
             {
                 Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, 0f, _dropItemOffset));
-                GameObject item = Instantiate(itemForDrop.GetItemData().prefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
+                GameObject item = Instantiate(itemForDrop.GetItemData().collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
                 item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
                 itemForDrop.RemoveItem();
+                if (itemForDrop.IsItemTool()) RemoveItemFromArms();
             }
         }
         private void ChangeSelectedSlot(int newSlot)
         {
             if (_selectedSlot >= 0) _inventorySlots[_selectedSlot].DeselectSlot();
-
+            if (_isToolInArms) RemoveItemFromArms();
 
             _selectedSlot = newSlot - 1;
             _inventorySlots[_selectedSlot].SelectSlot();
@@ -95,12 +98,31 @@ namespace Inventory
                 ItemDataSO itemData = itemInSlot.GetItemData();
                 if (itemData.type == ItemDataSO.ItemType.Tool)
                 {
-                    GameObject spawnedItem = Instantiate(itemData.prefab, _toolSlot.position, _toolSlot.rotation);
-                    spawnedItem.transform.parent = _toolSlot;
-                    spawnedItem.GetComponent<Rigidbody>().isKinematic = true;
+                    CreateToolInHands(itemData);
                 }
-
             }
+            else _isToolInArms = false;
+        }
+
+        private void CreateToolInHands(ItemDataSO itemData)
+        {
+            GameObject spawnedItem = Instantiate(itemData.inHandPrefab, _toolSlot.position, _toolSlot.rotation);
+            spawnedItem.transform.parent = _toolSlot;
+            _isToolInArms = true;
+        }
+        private void CheckForToolInSelectedSlot()
+        {
+            InventoryItem item = _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>();
+            if (item != null)
+            {
+                if (item.IsItemTool()) CreateToolInHands(item.GetItemData());
+            }
+        }
+
+        private void RemoveItemFromArms()
+        {
+            if (_toolSlot.childCount > 0) Destroy(_toolSlot.GetChild(0).gameObject);
+            _isToolInArms = false;
         }
         private void SpawnItemInSlot(ItemDataSO itemData, InventorySlot inventorySlot)
         {
@@ -118,16 +140,21 @@ namespace Inventory
         {
             _mainInventoryGroup.SetActive(false);
             _isOpened = false;
+            CheckForToolInSelectedSlot();
+
 
             _inputSystem.UnlockControl();
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         private void OpenInventory()
         {
             _inputSystem.LockControl();
+            Cursor.lockState = CursorLockMode.Confined;
 
             _mainInventoryGroup.SetActive(true);
             _isOpened = true;
+            RemoveItemFromArms();
 
             bool isItemAdded = AddItemToInventory(_itemData[Random.Range(0, _itemData.Length)]);
             Debug.Log("Item is added to inventory : " + isItemAdded.ToString());

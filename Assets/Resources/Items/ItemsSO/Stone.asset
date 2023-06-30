@@ -16,4 +16,6 @@ MonoBehaviour:
   maxStackSize: 8
   type: 1
   image: {fileID: 21300000, guid: c951b16606844174d9fd55c6a70ab61b, type: 3}
-  prefab: {fileID: 3908891698512574399, guid: 7d89e332a113b2e46b9138feac118c26, type: 3}
+  collectablePrefab: {fileID: 3908891698512574399, guid: 7d89e332a113b2e46b9138feac118c26,
+    type: 3}
+  inHandPrefab: {fileID: 0}

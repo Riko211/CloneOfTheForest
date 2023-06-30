@@ -32,6 +32,8 @@ namespace Infrastructure.States
         {
             var InitialPoint = GameObject.FindWithTag(InitialPointTag);
             _gameFactory.CreateHero(InitialPoint);
+            _gameFactory.CreateTarget();
+            Cursor.lockState = CursorLockMode.Locked;
 
             _gameStateMachine.Enter<GameFlowState>();
         }

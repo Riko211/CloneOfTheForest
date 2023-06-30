@@ -11,8 +11,11 @@ public class ItemDataSO : ScriptableObject
     [Header("UI")]
     public Sprite image;
 
-    [Header("Dropped item")]
-    public GameObject prefab;
+    [Header("Collectable item")]
+    public GameObject collectablePrefab;
+
+    [Header("InHand item (for tools)")]
+    public GameObject inHandPrefab;
 
 
     public enum ItemType
