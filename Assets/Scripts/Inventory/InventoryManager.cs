@@ -14,6 +14,8 @@ namespace Inventory
         [SerializeField, Tooltip("Inventory canvas")]
         private Transform _inventoryRoot;
         [SerializeField]
+        private Transform _toolSlot;
+        [SerializeField]
         private GameObject _inventoryItemPrefab;
 
         private bool _isOpened = false;
@@ -82,8 +84,23 @@ namespace Inventory
         private void ChangeSelectedSlot(int newSlot)
         {
             if (_selectedSlot >= 0) _inventorySlots[_selectedSlot].DeselectSlot();
-            _inventorySlots[newSlot - 1].SelectSlot();
+
+
             _selectedSlot = newSlot - 1;
+            _inventorySlots[_selectedSlot].SelectSlot();
+
+            InventoryItem itemInSlot = _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>();
+            if (itemInSlot != null)
+            {
+                ItemDataSO itemData = itemInSlot.GetItemData();
+                if (itemData.type == ItemDataSO.ItemType.Tool)
+                {
+                    GameObject spawnedItem = Instantiate(itemData.prefab, _toolSlot.position, _toolSlot.rotation);
+                    spawnedItem.transform.parent = _toolSlot;
+                    spawnedItem.GetComponent<Rigidbody>().isKinematic = true;
+                }
+
+            }
         }
         private void SpawnItemInSlot(ItemDataSO itemData, InventorySlot inventorySlot)
         {

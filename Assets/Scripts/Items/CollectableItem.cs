@@ -4,8 +4,11 @@ using UnityEngine;
 
 namespace Inventory
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class CollectableItem : MonoBehaviour, ICollectable
     {
+
+
         [SerializeField]
         private ItemDataSO _itemData;
 
