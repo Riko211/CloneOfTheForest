@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1dc5057834bab1a4cb19961401954fc5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 214095
+  packageName: HDRP Pine Tree
+  packageVersion: 1.1
+  assetPath: Assets/HDRP_Pine_Tree/Models/Pine/Materials/Bark_Pine.mat
+  uploadId: 490298
