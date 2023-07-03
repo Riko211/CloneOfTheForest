@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 4194.739, g: 3768.8013, b: 4178.0786, a: 1}
+  m_IndirectSpecularColor: {r: 4192.1216, g: 3765.9302, b: 4174.391, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1886,6 +1886,10 @@ MonoBehaviour:
   _maxLimitPoint: {x: 2500, y: 2500}
   _minPalmHeight: 1.5
   _maxPalmHeight: 10
+  _minOakHeight: 10
+  _maxOakHeight: 50
+  _minPineHeight: 50
+  _maxPineHeight: 500
   _parent: {fileID: 2113361424}
   _terrainLayer:
     serializedVersion: 2
@@ -1898,13 +1902,21 @@ MonoBehaviour:
   - {fileID: 3140268069909680672, guid: f7d65ceaec2544b418838d7bddad76b5, type: 3}
   - {fileID: 7884866982636937133, guid: bff89ddb0c4498e4c9904ff946f91097, type: 3}
   - {fileID: 5132085310128233590, guid: 70b7b3f589a115b4688200c8a6d5e54a, type: 3}
-  _oaks: []
+  _oaks:
+  - {fileID: 1485145988911329059, guid: 1b323422438057e4cb00a8e96866d859, type: 3}
+  - {fileID: 4754451832049290363, guid: 78de3af7ba376e0438633c337c9dcec9, type: 3}
+  - {fileID: 6618158521167236149, guid: 3cdc8041fa2fd094ea087ca022051ddd, type: 3}
+  - {fileID: 8502579871394470083, guid: 2fcd09d4ddfdd9541b7d59c206f010cd, type: 3}
+  - {fileID: 7217575115077337262, guid: 662a00c91e08f5d4bb2b86fbf1e4467d, type: 3}
   _pines:
   - {fileID: 9150739950267956327, guid: 38eebd1b1ede81a45933ca6280759cdb, type: 3}
   - {fileID: 4639371188737560655, guid: 5885a2550af49ff40b192f90b5303c0c, type: 3}
   _spawnPalms: 0
   _spawnOaks: 0
   _spawnPines: 0
+  _stopSpawnPalms: 0
+  _stopSpawnOaks: 0
+  _stopSpawnPines: 0
 --- !u!4 &1462617258
 Transform:
   m_ObjectHideFlags: 0
@@ -2816,7 +2828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2113361424}
   m_Layer: 0
-  m_Name: NewPalms
+  m_Name: NewTrees
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
