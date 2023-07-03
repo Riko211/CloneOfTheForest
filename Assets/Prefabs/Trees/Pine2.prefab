@@ -34,7 +34,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 175749885659214354}
+  - {fileID: 2403392094799523515}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8972948083908085072
@@ -104,8 +106,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitsToDestroy: 3
   _logDropPoints:
-  - {fileID: 1240047501266295122, guid: 38eebd1b1ede81a45933ca6280759cdb, type: 3}
-  - {fileID: 102450469690718103, guid: 38eebd1b1ede81a45933ca6280759cdb, type: 3}
+  - {fileID: 175749885659214354}
+  - {fileID: 2403392094799523515}
   _logData: {fileID: 11400000, guid: 2bc0fc78cb522d2438e51afae1603d07, type: 2}
   _stickData: {fileID: 11400000, guid: 9d28afb1cf0a77d41b792c9cbabc6d52, type: 2}
 --- !u!65 &-3766143346200234198
@@ -127,8 +129,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7, y: 37.44189, z: 0.7}
-  m_Center: {x: -0.02, y: 18.470945, z: -0.07}
+  m_Size: {x: 0.5, y: 14.469284, z: 0.5}
+  m_Center: {x: 0, y: 7.1494894, z: 0}
 --- !u!54 &4725195171241327605
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -175,3 +177,65 @@ LODGroup:
     renderers:
     - renderer: {fileID: 6585010272443691418}
   m_Enabled: 1
+--- !u!1 &6102898525090563302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 175749885659214354}
+  m_Layer: 8
+  m_Name: LogDropPoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &175749885659214354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6102898525090563302}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5416013033477638901}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!1 &6497899236480725818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2403392094799523515}
+  m_Layer: 8
+  m_Name: LogDropPoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2403392094799523515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6497899236480725818}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5416013033477638901}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
