@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 4192.1216, g: 3765.9302, b: 4174.391, a: 1}
+  m_IndirectSpecularColor: {r: 4192.3325, g: 3765.9966, b: 4174.6724, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1895,9 +1895,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   _palms:
-  - {fileID: 7218939740196854527, guid: d516cf150dd2b2e4a85e356187e34717, type: 3}
-  - {fileID: 5093426952746256368, guid: 756048542e0920f4792c7d8a799449fb, type: 3}
-  - {fileID: 8745678894546913729, guid: 1353a3531fc971340bab310246b7621e, type: 3}
   - {fileID: 4042644152295732028, guid: 9006b8bea9587c648999d744167a0d5a, type: 3}
   - {fileID: 3140268069909680672, guid: f7d65ceaec2544b418838d7bddad76b5, type: 3}
   - {fileID: 7884866982636937133, guid: bff89ddb0c4498e4c9904ff946f91097, type: 3}
@@ -1914,9 +1911,7 @@ MonoBehaviour:
   _spawnPalms: 0
   _spawnOaks: 0
   _spawnPines: 0
-  _stopSpawnPalms: 0
-  _stopSpawnOaks: 0
-  _stopSpawnPines: 0
+  _stopSpawnTrees: 0
 --- !u!4 &1462617258
 Transform:
   m_ObjectHideFlags: 0

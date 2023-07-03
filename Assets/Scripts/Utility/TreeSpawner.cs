@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class TreeSpawner : MonoBehaviour
@@ -44,11 +45,42 @@ public class TreeSpawner : MonoBehaviour
     [SerializeField]
     private bool _spawnPines = false;
     [SerializeField, Header("Stop spawn trees")]
-    private bool _stopSpawnPalms = false;
-    [SerializeField]
-    private bool _stopSpawnOaks = false;
-    [SerializeField]
-    private bool _stopSpawnPines = false;
+    private bool _stopSpawnTrees = false;
+
+    private int _treesSpawned = 0;
+
+
+    [MenuItem("Examples/Instantiate trees")]
+    static void InstantiatePrefab()
+    {
+        int treesToPlant = 10000;
+
+        GameObject[] palms = new GameObject[4];
+        palms[0] = Resources.Load<GameObject>("Prefabs/Trees/Palms/Palm4");
+        palms[1] = Resources.Load<GameObject>("Prefabs/Trees/Palms/Palm5");
+        palms[2] = Resources.Load<GameObject>("Prefabs/Trees/Palms/Palm6");
+        palms[3] = Resources.Load<GameObject>("Prefabs/Trees/Palms/Palm7");
+
+        while (treesToPlant>0)
+        {
+            Vector3 castPoint = new Vector3(Random.Range(0f, 2500f), 500f, Random.Range(0f, 2500f));
+            if (Physics.Raycast(castPoint, Vector3.down, out RaycastHit hit))
+            {
+                Vector3 hitPoint = hit.point;
+
+                if (hitPoint.y >= 1.5f && hitPoint.y <= 10f)
+                {
+                    Object SpawnedTree = PrefabUtility.InstantiatePrefab(palms[Random.Range(0, palms.Length)]);
+                    GameObject go = SpawnedTree as GameObject;
+                    go.transform.position = hitPoint - new Vector3(0, 0.1f, 0);
+                    go.transform.rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
+                    go.transform.parent = GameObject.Find("NewTrees").transform;
+                    treesToPlant--;
+                }
+            }
+        }
+
+    }
 
     void Update()
     {
@@ -68,23 +100,13 @@ public class TreeSpawner : MonoBehaviour
             _spawnPines = false;
         }
 
-        if (_stopSpawnPalms == true)
+        if (_stopSpawnTrees == true)
         {
-            StopCoroutine(SpawnPalms());
-            _stopSpawnPalms = false;
-        }
-        if (_stopSpawnOaks == true)
-        {
-            StopCoroutine(SpawnOaks());
-            _stopSpawnOaks = false;
-        }
-        if (_stopSpawnPines == true)
-        {
-            StopCoroutine(SpawnPines());
-            _stopSpawnPines = false;
+            StopAllCoroutines();
+            _stopSpawnTrees = false;
+            Debug.Log("Spawned trees: " + _treesSpawned.ToString());
         }
     }
-
     private IEnumerator SpawnPalms()
     {
         while (true)
@@ -101,11 +123,12 @@ public class TreeSpawner : MonoBehaviour
                         GameObject newPalm = Instantiate(_palms[Random.Range(0, _palms.Length)], hitPoint - new Vector3(0, 0.1f, 0), Quaternion.Euler(0, Random.Range(0, 360), 0));
                         newPalm.transform.SetParent(_parent);
                         _palmPlanted = true;
+                        _treesSpawned++;
                     }
                 }
             }
             _palmPlanted = false;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -125,11 +148,12 @@ public class TreeSpawner : MonoBehaviour
                         GameObject newOak = Instantiate(_oaks[Random.Range(0, _oaks.Length)], hitPoint - new Vector3(0, 0.1f, 0), Quaternion.Euler(0, Random.Range(0, 360), 0));
                         newOak.transform.SetParent(_parent);
                         _oakPlanted = true;
+                        _treesSpawned++;
                     }
                 }
             }
             _oakPlanted = false;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 
@@ -149,11 +173,12 @@ public class TreeSpawner : MonoBehaviour
                         GameObject newPine = Instantiate(_pines[Random.Range(0, _pines.Length)], hitPoint - new Vector3(0, 0.1f, 0), Quaternion.Euler(0, Random.Range(0, 360), 0));
                         newPine.transform.SetParent(_parent);
                         _pinePlanted = true;
+                        _treesSpawned++;
                     }
                 }
             }
             _pinePlanted = false;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 }
