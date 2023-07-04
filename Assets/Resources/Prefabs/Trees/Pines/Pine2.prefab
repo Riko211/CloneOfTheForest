@@ -110,6 +110,8 @@ MonoBehaviour:
   - {fileID: 2403392094799523515}
   _logData: {fileID: 11400000, guid: 2bc0fc78cb522d2438e51afae1603d07, type: 2}
   _stickData: {fileID: 11400000, guid: 9d28afb1cf0a77d41b792c9cbabc6d52, type: 2}
+  _saplingData: {fileID: 11400000, guid: 8d60b56c0e3c01647857b921b19b14aa, type: 2}
+  _saplingsDropCount: {x: 1, y: 2}
 --- !u!65 &-3766143346200234198
 BoxCollider:
   m_ObjectHideFlags: 0

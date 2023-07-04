@@ -172,6 +172,8 @@ MonoBehaviour:
   - {fileID: 6300510176659978705}
   _logData: {fileID: 11400000, guid: 2bc0fc78cb522d2438e51afae1603d07, type: 2}
   _stickData: {fileID: 11400000, guid: 9d28afb1cf0a77d41b792c9cbabc6d52, type: 2}
+  _saplingData: {fileID: 11400000, guid: 1385c05e6013a484c8471d4a22cd6963, type: 2}
+  _saplingsDropCount: {x: 1, y: 2}
 --- !u!205 &-9044323903115422390
 LODGroup:
   m_ObjectHideFlags: 0
