@@ -169,7 +169,7 @@ LODGroup:
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.01
+  - screenRelativeHeight: 0.0028
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2529517760175280873}
@@ -192,6 +192,8 @@ MonoBehaviour:
   - {fileID: 5239042083899216913}
   _logData: {fileID: 11400000, guid: 2bc0fc78cb522d2438e51afae1603d07, type: 2}
   _stickData: {fileID: 11400000, guid: 9d28afb1cf0a77d41b792c9cbabc6d52, type: 2}
+  _saplingData: {fileID: 11400000, guid: ab94233d52c71c941bfae0338eddbf85, type: 2}
+  _saplingsDropCount: {x: 1, y: 2}
 --- !u!65 &8296456725998153815
 BoxCollider:
   m_ObjectHideFlags: 0

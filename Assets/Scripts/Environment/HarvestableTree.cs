@@ -9,7 +9,9 @@ public class HarvestableTree : MonoBehaviour
     [SerializeField]
     private Transform[] _logDropPoints;
     [SerializeField]
-    private ItemDataSO _logData, _stickData;
+    private ItemDataSO _logData, _stickData, _saplingData;
+    [SerializeField]
+    private Vector2 _saplingsDropCount = new Vector2(1,2);
 
     public void HitTree()
     {
@@ -31,6 +33,11 @@ public class HarvestableTree : MonoBehaviour
         for (int i = 0; i < _logDropPoints.Length; i++)
         {
             Instantiate(_logData.collectablePrefab, _logDropPoints[i].position, _logDropPoints[i].rotation);
+        }
+        int saplingsDrop = Random.Range((int)_saplingsDropCount.x, (int)_saplingsDropCount.y + 1);
+        for (int i = 0; i < saplingsDrop; i++)
+        {
+            Instantiate(_saplingData.collectablePrefab, _logDropPoints[_logDropPoints.Length - 1].position + Vector3.up, Quaternion.identity);
         }
     }   
     private IEnumerator Falling()

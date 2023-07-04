@@ -53,7 +53,7 @@ public class TreeSpawner : MonoBehaviour
     [MenuItem("Examples/Instantiate trees")]
     static void InstantiatePrefab()
     {
-        int treesToPlant = 10000;
+        int treesToPlant = 1000;
 
         GameObject[] palms = new GameObject[4];
         palms[0] = Resources.Load<GameObject>("Prefabs/Trees/Palms/Palm4");
