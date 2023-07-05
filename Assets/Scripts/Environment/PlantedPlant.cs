@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Player.Items.Logic
+namespace Environment
 {
     public class PlantedPlant : MonoBehaviour
     {

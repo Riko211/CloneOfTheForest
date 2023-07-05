@@ -24,8 +24,6 @@ namespace Inventory
 
         private InputSystem _inputSystem;
 
-        [SerializeField]
-        private ItemDataSO[] _itemData;
         private float _dropItemOffset = 0.75f;
 
         private void Start()
@@ -155,9 +153,6 @@ namespace Inventory
             _mainInventoryGroup.SetActive(true);
             _isOpened = true;
             RemoveItemFromArms();
-
-            bool isItemAdded = AddItemToInventory(_itemData[Random.Range(0, _itemData.Length)]);
-            Debug.Log("Item is added to inventory : " + isItemAdded.ToString());
         }
     }
 }
