@@ -13,6 +13,9 @@ namespace Inventory
         [SerializeField]
         private Color _selectedColor, _defaultColor;
 
+        [SerializeField]
+        private bool _canPutItem = true;
+
         private void Start()
         {
             //_defaultColor = _image.color;
@@ -27,19 +30,22 @@ namespace Inventory
         }
         public void OnDrop(PointerEventData eventData)
         {
-            if (transform.childCount == 0)
+            if (_canPutItem)
             {
-                InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
-                inventoryItem.SetSlot(transform);
-            }
-            else
-            {
-                InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
-                InventoryItem itemInSlot = GetComponentInChildren<InventoryItem>();
+                if (transform.childCount == 0)
+                {
+                    InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
+                    inventoryItem.SetSlot(transform);
+                }
+                else
+                {
+                    InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
+                    InventoryItem itemInSlot = GetComponentInChildren<InventoryItem>();
 
-                Transform previousItemSlot = inventoryItem.GetSlot();
-                itemInSlot.transform.SetParent(previousItemSlot);
-                inventoryItem.SetSlot(transform);
+                    Transform previousItemSlot = inventoryItem.GetSlot();
+                    itemInSlot.transform.SetParent(previousItemSlot);
+                    inventoryItem.SetSlot(transform);
+                }
             }
         }
     }
