@@ -459,6 +459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inventoryManager: {fileID: 8009679898022182284}
   _startItems:
+  - itemData: {fileID: 11400000, guid: 4c76b28c1dfe09846bc79477c7881b3b, type: 2}
+    count: 1
   - itemData: {fileID: 11400000, guid: 2bc0fc78cb522d2438e51afae1603d07, type: 2}
     count: 4
   - itemData: {fileID: 11400000, guid: cd841c3be4f8c8c44a0f2120004818f3, type: 2}

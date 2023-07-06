@@ -75,9 +75,12 @@ namespace Inventory
                 if (_count > 1)
                 {
                     int itemsCountToAdd = _count / 2;
-                    _inventoryManager.AddItemsToInvetory(_itemData, itemsCountToAdd);
-                    _count -= itemsCountToAdd;
-                    RefreshCount();
+                    bool isItemAdded = _inventoryManager.AddItemsToInventory(_itemData, itemsCountToAdd);
+                    if (isItemAdded)
+                    {
+                        _count -= itemsCountToAdd;
+                        RefreshCount();
+                    }
                 }
             }
         }

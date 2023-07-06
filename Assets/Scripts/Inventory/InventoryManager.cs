@@ -76,7 +76,7 @@ namespace Inventory
 
             return false;
         }
-        public bool AddItemsToInvetory(ItemDataSO itemData, int count) 
+        public bool AddItemsToInventory(ItemDataSO itemData, int count) 
         {
             for (int i = 0; i < _inventorySlots.Length; i++)
             {
