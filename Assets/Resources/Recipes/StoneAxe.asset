@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dfc74ad4e5f899439c42e3a14ee51b6, type: 3}
+  m_Name: StoneAxe
+  m_EditorClassIdentifier: 
+  output: {fileID: 11400000, guid: 4c76b28c1dfe09846bc79477c7881b3b, type: 2}
+  outputCount: 1
+  input:
+  - {fileID: 11400000, guid: cd841c3be4f8c8c44a0f2120004818f3, type: 2}
+  - {fileID: 11400000, guid: cd841c3be4f8c8c44a0f2120004818f3, type: 2}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: cd841c3be4f8c8c44a0f2120004818f3, type: 2}
+  - {fileID: 11400000, guid: 9d28afb1cf0a77d41b792c9cbabc6d52, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 9d28afb1cf0a77d41b792c9cbabc6d52, type: 2}
+  - {fileID: 0}
