@@ -39,6 +39,7 @@ namespace Infrastructure.States
             _services.RegisterSingle<SceneLoader>(new SceneLoader(_coroutineRunner));
             _services.RegisterSingle<AssetProvider>(new AssetProvider());
             _services.RegisterSingle<GameFactory>(new GameFactory(_services.Single<AssetProvider>()));
+            _services.RegisterSingle<EventManager>(new EventManager());
 
             GameObject inputServiceGameObject = _services.Single<GameFactory>().CreateInputSystem();
             _services.RegisterSingle<InputSystem>(inputServiceGameObject.GetComponent<InputSystem>());

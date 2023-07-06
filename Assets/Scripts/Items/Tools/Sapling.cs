@@ -1,4 +1,5 @@
 using Infrastructure.Services;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,12 +21,14 @@ namespace Player.Items
         private LayerMask _terrainLayer;
 
         private InputSystem _inputSystem;
+        private EventManager _eventManager;
         private Camera _mainCamera;
         private GameObject _blueprint;
 
         private void Start()
         {
             _inputSystem = AllServices.Container.Single<InputSystem>();
+            _eventManager = AllServices.Container.Single<EventManager>();
 
             _blueprint = Instantiate(_saplingBlueprint);
 
@@ -56,6 +59,7 @@ namespace Player.Items
         private void PlantTree()
         {
             Instantiate(_sapling, _blueprint.transform.position, Quaternion.identity);
+            _eventManager.SelectedItemUseAction?.Invoke();
             Destroy(gameObject);
         }
       

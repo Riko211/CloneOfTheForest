@@ -23,6 +23,7 @@ namespace Inventory
         private bool _isToolInArms = false;
 
         private InputSystem _inputSystem;
+        private EventManager _eventManager;
 
         private float _dropItemOffset = 0.75f;
 
@@ -32,6 +33,9 @@ namespace Inventory
             ChangeSelectedSlot(_selectedSlot);
 
             _inputSystem = AllServices.Container.Single<InputSystem>();
+            _eventManager = AllServices.Container.Single<EventManager>();
+
+            _eventManager.SelectedItemUseAction += UseSelectedItem;
 
             _inputSystem.OpenInventoryAction += ChangeInventoryState;
             _inputSystem.ToolbarAction += ChangeSelectedSlot;
@@ -39,6 +43,8 @@ namespace Inventory
         }
         private void OnDestroy()
         {
+            _eventManager.SelectedItemUseAction -= UseSelectedItem;
+
             _inputSystem.OpenInventoryAction -= ChangeInventoryState;
             _inputSystem.ToolbarAction -= ChangeSelectedSlot;
             _inputSystem.DropItemAction -= DropItem;
@@ -115,6 +121,10 @@ namespace Inventory
             {
                 if (item.IsItemTool()) CreateToolInHands(item.GetItemData());
             }
+        }
+        private void UseSelectedItem()
+        {
+            _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>().RemoveItem();
         }
 
         private void RemoveItemFromArms()
