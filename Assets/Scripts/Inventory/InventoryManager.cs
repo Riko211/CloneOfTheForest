@@ -26,6 +26,7 @@ namespace Inventory
         private EventManager _eventManager;
 
         private float _dropItemOffset = 0.75f;
+        private const int _slotsCount = 8;
 
         private void Start()
         {
@@ -40,6 +41,8 @@ namespace Inventory
             _inputSystem.OpenInventoryAction += ChangeInventoryState;
             _inputSystem.ToolbarAction += ChangeSelectedSlot;
             _inputSystem.DropItemAction += DropItem;
+            _inputSystem.NextItemAction += ChangeSlotToNext;
+            _inputSystem.PreviousItemAction += ChangeSlotToPrevious;
         }
         private void OnDestroy()
         {
@@ -48,6 +51,8 @@ namespace Inventory
             _inputSystem.OpenInventoryAction -= ChangeInventoryState;
             _inputSystem.ToolbarAction -= ChangeSelectedSlot;
             _inputSystem.DropItemAction -= DropItem;
+            _inputSystem.NextItemAction -= ChangeSlotToNext;
+            _inputSystem.PreviousItemAction -= ChangeSlotToPrevious;
         }
         public bool AddItemToInventory(ItemDataSO itemData)
         {
@@ -134,6 +139,18 @@ namespace Inventory
                 }
             }
             else _isToolInArms = false;
+        }
+        private void ChangeSlotToNext()
+        {
+            int nextSlot = (_selectedSlot + 1) + 1;
+            if (nextSlot > _slotsCount) nextSlot = 1;
+            ChangeSelectedSlot(nextSlot);
+        }
+        private void ChangeSlotToPrevious()
+        {
+            int previousSlot = (_selectedSlot + 1) - 1;
+            if (previousSlot < 1) previousSlot = _slotsCount;
+            ChangeSelectedSlot(previousSlot);
         }
 
         private void CreateToolInHands(ItemDataSO itemData)

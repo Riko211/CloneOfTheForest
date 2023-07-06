@@ -107,6 +107,24 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NextItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""1cfecfe2-2576-4f6c-aab9-f865c638afae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PreviousItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""9dd18857-cdf4-46a1-b115-3243e721b3e6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -340,6 +358,28 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""LMBClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42e59e2b-2fc4-40d0-8bc0-434a495766c4"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PreviousItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03e01acc-48e7-456c-92a5-bde41feb1b28"",
+                    ""path"": ""<Mouse>/scroll/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NextItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -363,6 +403,8 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         m_Player_ItemPickUp = m_Player.FindAction("ItemPickUp", throwIfNotFound: true);
         m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
         m_Player_LMBClick = m_Player.FindAction("LMBClick", throwIfNotFound: true);
+        m_Player_NextItem = m_Player.FindAction("NextItem", throwIfNotFound: true);
+        m_Player_PreviousItem = m_Player.FindAction("PreviousItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -433,6 +475,8 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ItemPickUp;
     private readonly InputAction m_Player_DropItem;
     private readonly InputAction m_Player_LMBClick;
+    private readonly InputAction m_Player_NextItem;
+    private readonly InputAction m_Player_PreviousItem;
     public struct PlayerActions
     {
         private @MainInputAction m_Wrapper;
@@ -446,6 +490,8 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         public InputAction @ItemPickUp => m_Wrapper.m_Player_ItemPickUp;
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
         public InputAction @LMBClick => m_Wrapper.m_Player_LMBClick;
+        public InputAction @NextItem => m_Wrapper.m_Player_NextItem;
+        public InputAction @PreviousItem => m_Wrapper.m_Player_PreviousItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -482,6 +528,12 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @LMBClick.started += instance.OnLMBClick;
             @LMBClick.performed += instance.OnLMBClick;
             @LMBClick.canceled += instance.OnLMBClick;
+            @NextItem.started += instance.OnNextItem;
+            @NextItem.performed += instance.OnNextItem;
+            @NextItem.canceled += instance.OnNextItem;
+            @PreviousItem.started += instance.OnPreviousItem;
+            @PreviousItem.performed += instance.OnPreviousItem;
+            @PreviousItem.canceled += instance.OnPreviousItem;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -513,6 +565,12 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @LMBClick.started -= instance.OnLMBClick;
             @LMBClick.performed -= instance.OnLMBClick;
             @LMBClick.canceled -= instance.OnLMBClick;
+            @NextItem.started -= instance.OnNextItem;
+            @NextItem.performed -= instance.OnNextItem;
+            @NextItem.canceled -= instance.OnNextItem;
+            @PreviousItem.started -= instance.OnPreviousItem;
+            @PreviousItem.performed -= instance.OnPreviousItem;
+            @PreviousItem.canceled -= instance.OnPreviousItem;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -550,5 +608,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         void OnItemPickUp(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
         void OnLMBClick(InputAction.CallbackContext context);
+        void OnNextItem(InputAction.CallbackContext context);
+        void OnPreviousItem(InputAction.CallbackContext context);
     }
 }
