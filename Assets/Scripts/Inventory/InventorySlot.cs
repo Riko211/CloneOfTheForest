@@ -16,10 +16,6 @@ namespace Inventory
         [SerializeField]
         private bool _canPutItem = true;
 
-        private void Start()
-        {
-            //_defaultColor = _image.color;
-        }
         public void SelectSlot()
         {
             _image.color = _selectedColor;

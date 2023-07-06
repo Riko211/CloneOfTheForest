@@ -7,9 +7,11 @@ namespace Inventory
     public class CraftingSystem : MonoBehaviour
     {
         [SerializeField]
+        private InventoryManager _inventoryManager;
+        [SerializeField]
         private CraftingSlot[] _craftingSlots;
         [SerializeField]
-        private Transform _outputTransform;
+        private InventorySlot _outputSlot;
         [SerializeField]
         private GameObject _inventoryItemPrefab;
         [SerializeField]
@@ -36,7 +38,6 @@ namespace Inventory
                 if (item != null) itemsInCraftSlots[i] = item.GetItemData();
             }
             bool isRecipeEqual = true;
-            int recipeNum;
 
             foreach (RecipeSO recipe in _recipes)
             {
@@ -60,9 +61,7 @@ namespace Inventory
         }
         private void CreateOutputItem(ItemDataSO itemData)
         {
-            GameObject newItemGO = Instantiate(_inventoryItemPrefab, _outputTransform.transform);
-            InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
-            inventoryItem.InitializeItem(itemData, _inventoryRoot);
+            _inventoryManager.SpawnItemInSlot(itemData, _outputSlot);
         }
     }
 }

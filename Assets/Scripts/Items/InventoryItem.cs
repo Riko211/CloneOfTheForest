@@ -8,7 +8,7 @@ using TMPro;
 
 namespace Inventory
 {
-    public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
         [SerializeField]
         private ItemDataSO _itemData;
@@ -24,18 +24,30 @@ namespace Inventory
         private Transform _parentBeforeDrag;
         private InputSystem _inputSystem;
         private Transform _inventoryRoot;
+        private InventoryManager _inventoryManager;
 
         private void Start()
         {
             //InitializeItem(_itemData);
             _inputSystem = AllServices.Container.Single<InputSystem>();
         }
-        public void InitializeItem(ItemDataSO itemData, Transform rootTransform)
+        public void InitializeItem(ItemDataSO itemData, Transform rootTransform, InventoryManager inventoryManager)
         {
             _itemData = itemData;
             _image.sprite = itemData.image;
             _inventoryRoot = rootTransform;
             _maxStackSize = itemData.maxStackSize;
+            _inventoryManager = inventoryManager;
+            RefreshCount();
+        }
+        public void InitializeItem(ItemDataSO itemData, Transform rootTransform, int count, InventoryManager inventoryManager)
+        {
+            _itemData = itemData;
+            _image.sprite = itemData.image;
+            _inventoryRoot = rootTransform;
+            _maxStackSize = itemData.maxStackSize;
+            _inventoryManager = inventoryManager;
+            _count = count;
             RefreshCount();
         }
         public void OnBeginDrag(PointerEventData eventData)
@@ -56,7 +68,20 @@ namespace Inventory
             _image.raycastTarget = true;
             if (_parentBeforeDrag == _parentAfterDrag) transform.SetParent(_parentAfterDrag);
         }
-        
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                if (_count > 1)
+                {
+                    int itemsCountToAdd = _count / 2;
+                    _inventoryManager.AddItemsToInvetory(_itemData, itemsCountToAdd);
+                    _count -= itemsCountToAdd;
+                    RefreshCount();
+                }
+            }
+        }
+
         public void SetSlot(Transform parent)
         {
             _parentAfterDrag = parent;
@@ -95,5 +120,7 @@ namespace Inventory
             if (_count > 1) _countTXT.text = _count.ToString();
             else _countTXT.text = "";
         }
+
+
     }
 }

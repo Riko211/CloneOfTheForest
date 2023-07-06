@@ -76,6 +76,34 @@ namespace Inventory
 
             return false;
         }
+        public bool AddItemsToInvetory(ItemDataSO itemData, int count) 
+        {
+            for (int i = 0; i < _inventorySlots.Length; i++)
+            {
+                InventorySlot slot = _inventorySlots[i];
+                InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+                if (itemInSlot == null)
+                {
+                    SpawnItemInSlot(itemData, slot, count);
+                    if (itemData.type == ItemDataSO.ItemType.Tool && _selectedSlot == i) CreateToolInHands(itemData);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public void SpawnItemInSlot(ItemDataSO itemData, InventorySlot inventorySlot)
+        {
+            GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlot.transform);
+            InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
+            inventoryItem.InitializeItem(itemData, _inventoryRoot, this);
+        }
+        public void SpawnItemInSlot(ItemDataSO itemData, InventorySlot inventorySlot, int count)
+        {
+            GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlot.transform);
+            InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
+            inventoryItem.InitializeItem(itemData, _inventoryRoot, count, this);         
+        }
         private void DropItem()
         {
             InventoryItem itemForDrop = _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>();
@@ -131,12 +159,6 @@ namespace Inventory
         {
             if (_toolSlot.childCount > 0) Destroy(_toolSlot.GetChild(0).gameObject);
             _isToolInArms = false;
-        }
-        private void SpawnItemInSlot(ItemDataSO itemData, InventorySlot inventorySlot)
-        {
-            GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlot.transform);
-            InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
-            inventoryItem.InitializeItem(itemData, _inventoryRoot);
         }
         private void ChangeInventoryState()
         {
