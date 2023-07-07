@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ namespace Inventory
 {
     public class InventorySlot : MonoBehaviour, IDropHandler
     {
+        public Action OnItemTake;
+
         [SerializeField]
         private Image _image;
         [SerializeField]

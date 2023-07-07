@@ -56,6 +56,9 @@ namespace Inventory
             _parentBeforeDrag = transform.parent;
             _parentAfterDrag = transform.parent;
             transform.SetParent(_inventoryRoot);
+
+            InventorySlot previousSlot = _parentBeforeDrag.GetComponent<InventorySlot>();
+            if (previousSlot != null) previousSlot.OnItemTake?.Invoke();
         }
 
         public void OnDrag(PointerEventData eventData)

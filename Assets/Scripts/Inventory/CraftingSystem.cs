@@ -23,10 +23,12 @@ namespace Inventory
 
         private void Start()
         {
+            _outputSlot.OnItemTake += PickItemFromOutputSlot;
             foreach (CraftingSlot slot in _craftingSlots) slot.OnItemDropAction += CheckForRecipe;
         }
         private void OnDestroy()
         {
+            _outputSlot.OnItemTake -= PickItemFromOutputSlot;
             foreach (CraftingSlot slot in _craftingSlots) slot.OnItemDropAction -= CheckForRecipe;
         }
         private void CheckForRecipe()
@@ -59,9 +61,27 @@ namespace Inventory
                 }  
             }
         }
+        private bool CheckForItemsInCraftingSlots()
+        {
+            foreach(CraftingSlot slot in _craftingSlots)
+            {
+                if (slot.transform.childCount > 0) return true;
+            }
+            return false;
+        }
         private void CreateOutputItem(ItemDataSO itemData)
         {
             _inventoryManager.SpawnItemInSlot(itemData, _outputSlot);
+        }
+
+        private void PickItemFromOutputSlot()
+        {
+            foreach (CraftingSlot slot in _craftingSlots)
+            {
+                InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+                if (itemInSlot != null) itemInSlot.RemoveItem();
+            }
+            Invoke(nameof(CheckForRecipe), 0.02f);
         }
     }
 }
