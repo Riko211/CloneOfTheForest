@@ -74,6 +74,10 @@ namespace Inventory
                             draggableItem.SetSlot(transform);
                         }
                     }
+                    else
+                    {
+
+                    }
                 }
                 OnItemDrop?.Invoke();
             }

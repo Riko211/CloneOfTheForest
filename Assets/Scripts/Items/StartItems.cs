@@ -23,7 +23,7 @@ namespace Player.Items
         {
             foreach(StartItem item in _startItems)
             {
-                _inventoryManager.AddItemsToInventory(item.itemData, item.count);
+                _inventoryManager.AddItemsToInventoryInFreeSlot(item.itemData, item.count);
             }
         }
     }

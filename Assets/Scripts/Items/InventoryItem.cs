@@ -71,13 +71,21 @@ namespace Inventory
             _image.raycastTarget = true;
             if (_parentBeforeDrag == _parentAfterDrag)
             {
-                InventorySlot slot = _parentBeforeDrag.GetComponent<InventorySlot>();
-                if (slot.IsCanPutItem()) 
+                InventorySlot slotBeforeDrag = _parentBeforeDrag.GetComponent<InventorySlot>();
+                if (slotBeforeDrag.IsCanPutItem())
                 {
                     transform.SetParent(_parentAfterDrag);
                     _parentAfterDrag.GetComponent<InventorySlot>().OnItemDrop?.Invoke();
                 }
-                else _inventoryManager.AddCurrentItemsToInventory(this);
+                else 
+                { 
+                    bool isAdded = _inventoryManager.AddCurrentItemToInventory(this);
+                    if (!isAdded)
+                    {
+                        _inventoryManager.DropItem(this);
+                        Destroy(gameObject);
+                    }
+                }
             }
         }
         public void OnPointerClick(PointerEventData eventData)
@@ -87,7 +95,7 @@ namespace Inventory
                 if (_count > 1)
                 {
                     int itemsCountToAdd = _count / 2;
-                    bool isItemAdded = _inventoryManager.AddItemsToInventory(_itemData, itemsCountToAdd);
+                    bool isItemAdded = _inventoryManager.AddItemsToInventoryInFreeSlot(_itemData, itemsCountToAdd);
                     if (isItemAdded)
                     {
                         _count -= itemsCountToAdd;
@@ -99,7 +107,6 @@ namespace Inventory
 
         public void SetSlot(Transform parent)
         {
-            _parentBeforeDrag.GetComponent<InventorySlot>().OnItemTake?.Invoke();
             _parentAfterDrag = parent;
             transform.SetParent(_parentAfterDrag);
         }

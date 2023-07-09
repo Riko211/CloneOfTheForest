@@ -60,7 +60,7 @@ namespace Inventory
 
                 if (isRecipeEqual) 
                 {
-                    CreateOutputItem(recipe.output);
+                    CreateOutputItem(recipe.output, recipe.outputCount);
                     break;
                 }  
             }
@@ -76,6 +76,10 @@ namespace Inventory
         private void CreateOutputItem(ItemDataSO itemData)
         {
             _inventoryManager.SpawnItemInSlot(itemData, _outputSlot);
+        }
+        private void CreateOutputItem(ItemDataSO itemData, int count)
+        {
+            _inventoryManager.SpawnItemInSlot(itemData, _outputSlot, count);
         }
         private void ClearOutputSlot()
         {

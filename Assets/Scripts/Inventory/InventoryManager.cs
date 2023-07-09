@@ -81,7 +81,7 @@ namespace Inventory
 
             return false;
         }
-        public bool AddItemsToInventory(ItemDataSO itemData, int count) 
+        public bool AddItemsToInventoryInFreeSlot(ItemDataSO itemData, int count) 
         {
             for (int i = 0; i < _inventorySlots.Length; i++)
             {
@@ -97,16 +97,42 @@ namespace Inventory
 
             return false;
         }
-        public bool AddCurrentItemsToInventory(InventoryItem item)
+        public bool AddCurrentItemToInventory(InventoryItem itemToAdd)
         {
+            for (int i = 0; i < _inventorySlots.Length; i++)
+            {
+                InventorySlot slot = _inventorySlots[i];
+                InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+                ItemDataSO itemData = itemToAdd.GetItemData();
+
+                if (itemInSlot != null && itemData.stackable && itemInSlot.GetItemData() == itemData && itemInSlot.GetItemCount() < itemData.maxStackSize)
+                {
+                    int itemToAddCount = itemToAdd.GetItemCount();
+                    int itemInSlotCount = itemInSlot.GetItemCount();
+                    int stackSize = itemInSlot.GetItemData().maxStackSize;
+
+                    if (itemInSlotCount + itemToAddCount <= stackSize)
+                    {
+                        itemInSlot.AddItems(itemToAddCount);
+                        Destroy(itemToAdd.gameObject);
+                        return true;
+                    }
+                    else
+                    {
+                        itemInSlot.AddItems(stackSize - itemInSlotCount);
+                        itemToAdd.RemoveItems(stackSize - itemInSlotCount);
+                    }
+                }
+            }
+
             for (int i = 0; i < _inventorySlots.Length; i++)
             {
                 InventorySlot slot = _inventorySlots[i];
                 InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
                 if (itemInSlot == null)
                 {
-                    item.transform.SetParent(slot.transform);
-                    ItemDataSO itemData = item.GetItemData();
+                    itemToAdd.transform.SetParent(slot.transform);
+                    ItemDataSO itemData = itemToAdd.GetItemData();
                     if (itemData.type == ItemDataSO.ItemType.Tool && _selectedSlot == i) CreateToolInHands(itemData);
                     return true;
                 }
@@ -137,6 +163,12 @@ namespace Inventory
                 itemForDrop.RemoveItem();
                 if (itemForDrop.IsItemTool()) RemoveItemFromArms();
             }
+        }
+        public void DropItem(InventoryItem itemForDrop)
+        {
+            Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, 0f, _dropItemOffset));
+            GameObject item = Instantiate(itemForDrop.GetItemData().collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
+            item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
         }
         private void ChangeSelectedSlot(int newSlot)
         {
