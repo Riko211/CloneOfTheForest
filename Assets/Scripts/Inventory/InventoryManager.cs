@@ -97,6 +97,23 @@ namespace Inventory
 
             return false;
         }
+        public bool AddCurrentItemsToInventory(InventoryItem item)
+        {
+            for (int i = 0; i < _inventorySlots.Length; i++)
+            {
+                InventorySlot slot = _inventorySlots[i];
+                InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
+                if (itemInSlot == null)
+                {
+                    item.transform.SetParent(slot.transform);
+                    ItemDataSO itemData = item.GetItemData();
+                    if (itemData.type == ItemDataSO.ItemType.Tool && _selectedSlot == i) CreateToolInHands(itemData);
+                    return true;
+                }
+            }
+
+            return false;
+        }
         public void SpawnItemInSlot(ItemDataSO itemData, InventorySlot inventorySlot)
         {
             GameObject newItemGO = Instantiate(_inventoryItemPrefab, inventorySlot.transform);

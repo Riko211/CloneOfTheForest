@@ -69,7 +69,12 @@ namespace Inventory
         public void OnEndDrag(PointerEventData eventData)
         {
             _image.raycastTarget = true;
-            if (_parentBeforeDrag == _parentAfterDrag) transform.SetParent(_parentAfterDrag);
+            if (_parentBeforeDrag == _parentAfterDrag)
+            {
+                InventorySlot slot = _parentBeforeDrag.GetComponent<InventorySlot>();
+                if (slot.IsCanPutItem()) transform.SetParent(_parentAfterDrag);
+                else _inventoryManager.AddCurrentItemsToInventory(this);
+            }
         }
         public void OnPointerClick(PointerEventData eventData)
         {

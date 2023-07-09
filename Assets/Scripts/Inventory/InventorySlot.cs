@@ -27,6 +27,10 @@ namespace Inventory
         {
             _image.color = _defaultColor;
         }
+        public bool IsCanPutItem()
+        {
+            return _canPutItem;
+        }
         public void OnDrop(PointerEventData eventData)
         {
             if (_canPutItem)
@@ -42,8 +46,12 @@ namespace Inventory
                     InventoryItem itemInSlot = GetComponentInChildren<InventoryItem>();
 
                     Transform previousItemSlot = inventoryItem.GetSlot();
-                    itemInSlot.transform.SetParent(previousItemSlot);
-                    inventoryItem.SetSlot(transform);
+
+                    if (previousItemSlot.GetComponent<InventorySlot>().IsCanPutItem() && _canPutItem)
+                    {
+                        itemInSlot.transform.SetParent(previousItemSlot);
+                        inventoryItem.SetSlot(transform);
+                    }
                 }
             }
         }
