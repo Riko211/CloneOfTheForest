@@ -115,9 +115,20 @@ namespace Inventory
             _count++;
             RefreshCount();
         }
+        public void AddItems(int count)
+        {
+            _count += count;
+            RefreshCount();
+        }
         public void RemoveItem()
         {
             _count--;
+            RefreshCount();
+            if (_count <= 0) Destroy(gameObject);
+        }
+        public void RemoveItems(int count)
+        {
+            _count -= count;
             RefreshCount();
             if (_count <= 0) Destroy(gameObject);
         }

@@ -42,15 +42,37 @@ namespace Inventory
                 }
                 else
                 {
-                    InventoryItem inventoryItem = eventData.pointerDrag.GetComponent<InventoryItem>();
+                    InventoryItem draggableItem = eventData.pointerDrag.GetComponent<InventoryItem>();
                     InventoryItem itemInSlot = GetComponentInChildren<InventoryItem>();
 
-                    Transform previousItemSlot = inventoryItem.GetSlot();
+                    Transform previousItemSlot = draggableItem.GetSlot();
 
                     if (previousItemSlot.GetComponent<InventorySlot>().IsCanPutItem() && _canPutItem)
                     {
-                        itemInSlot.transform.SetParent(previousItemSlot);
-                        inventoryItem.SetSlot(transform);
+                        if (draggableItem.GetItemData() == itemInSlot.GetItemData()) 
+                        {
+                            int draggableItemCount = draggableItem.GetItemCount();
+                            int itemInSlotCount = itemInSlot.GetItemCount();
+                            int stackSize = itemInSlot.GetItemData().maxStackSize;
+
+                            if (itemInSlotCount + draggableItemCount <= stackSize)
+                            {
+                                itemInSlot.AddItems(draggableItemCount);
+                                draggableItem.RemoveItems(draggableItemCount);
+                            }
+                            else
+                            {
+                                int itemsToAdd = stackSize - itemInSlotCount;
+                                itemInSlot.AddItems(itemsToAdd);
+                                draggableItem.RemoveItems(itemsToAdd);
+                            }
+                            
+                        }
+                        else
+                        {
+                            itemInSlot.transform.SetParent(previousItemSlot);
+                            draggableItem.SetSlot(transform);
+                        }
                     }
                 }
             }
