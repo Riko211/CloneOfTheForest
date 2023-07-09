@@ -14,45 +14,31 @@ namespace Inventory
         [SerializeField, Tooltip("Inventory canvas")]
         private Transform _inventoryRoot;
         [SerializeField]
-        private Transform _toolSlot;
-        [SerializeField]
         private GameObject _inventoryItemPrefab;
+        [SerializeField]
+        private SlotSelector _slotSelector;
 
         private bool _isOpened = false;
-        private int _selectedSlot = 1;
-        private bool _isToolInArms = false;
 
         private InputSystem _inputSystem;
-        private EventManager _eventManager;
 
         private float _dropItemOffset = 0.75f;
-        private const int _slotsCount = 8;
+        private float _multipleDropItemOffset = 0.1f;
+
 
         private void Start()
         {
             _isOpened = _mainInventoryGroup.activeSelf;
-            ChangeSelectedSlot(_selectedSlot);
-
             _inputSystem = AllServices.Container.Single<InputSystem>();
-            _eventManager = AllServices.Container.Single<EventManager>();
-
-            _eventManager.SelectedItemUseAction += UseSelectedItem;
 
             _inputSystem.OpenInventoryAction += ChangeInventoryState;
-            _inputSystem.ToolbarAction += ChangeSelectedSlot;
-            _inputSystem.DropItemAction += DropItem;
-            _inputSystem.NextItemAction += ChangeSlotToNext;
-            _inputSystem.PreviousItemAction += ChangeSlotToPrevious;
+            _inputSystem.DropItemAction += DropItemFromSelectedSlot;
         }
         private void OnDestroy()
         {
-            _eventManager.SelectedItemUseAction -= UseSelectedItem;
-
             _inputSystem.OpenInventoryAction -= ChangeInventoryState;
-            _inputSystem.ToolbarAction -= ChangeSelectedSlot;
-            _inputSystem.DropItemAction -= DropItem;
-            _inputSystem.NextItemAction -= ChangeSlotToNext;
-            _inputSystem.PreviousItemAction -= ChangeSlotToPrevious;
+            _inputSystem.DropItemAction -= DropItemFromSelectedSlot;
+
         }
         public bool AddItemToInventory(ItemDataSO itemData)
         {
@@ -74,7 +60,7 @@ namespace Inventory
                 if (itemInSlot == null)
                 {
                     SpawnItemInSlot(itemData, slot);
-                    if (itemData.type == ItemDataSO.ItemType.Tool && _selectedSlot == i) CreateToolInHands(itemData);
+                    if (itemData.type == ItemDataSO.ItemType.Tool && _slotSelector.GetSelectedSlot() == i) _slotSelector.CreateToolInHands(itemData);
                     return true;
                 }
             }
@@ -90,7 +76,7 @@ namespace Inventory
                 if (itemInSlot == null)
                 {
                     SpawnItemInSlot(itemData, slot, count);
-                    if (itemData.type == ItemDataSO.ItemType.Tool && _selectedSlot == i) CreateToolInHands(itemData);
+                    if (itemData.type == ItemDataSO.ItemType.Tool && _slotSelector.GetSelectedSlot() == i) _slotSelector.CreateToolInHands(itemData);
                     return true;
                 }
             }
@@ -133,7 +119,7 @@ namespace Inventory
                 {
                     itemToAdd.transform.SetParent(slot.transform);
                     ItemDataSO itemData = itemToAdd.GetItemData();
-                    if (itemData.type == ItemDataSO.ItemType.Tool && _selectedSlot == i) CreateToolInHands(itemData);
+                    if (itemData.type == ItemDataSO.ItemType.Tool && _slotSelector.GetSelectedSlot() == i) _slotSelector.CreateToolInHands(itemData);
                     return true;
                 }
             }
@@ -152,16 +138,16 @@ namespace Inventory
             InventoryItem inventoryItem = newItemGO.GetComponent<InventoryItem>();
             inventoryItem.InitializeItem(itemData, _inventoryRoot, count, this);         
         }
-        private void DropItem()
+        private void DropItemFromSelectedSlot()
         {
-            InventoryItem itemForDrop = _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>();
-            if (itemForDrop != null && _selectedSlot >= 0)
+            InventoryItem itemForDrop = _inventorySlots[_slotSelector.GetSelectedSlot()].GetComponentInChildren<InventoryItem>();
+            if (itemForDrop != null && _slotSelector.GetSelectedSlot() >= 0)
             {
                 Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, 0f, _dropItemOffset));
                 GameObject item = Instantiate(itemForDrop.GetItemData().collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
                 item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
                 itemForDrop.RemoveItem();
-                if (itemForDrop.IsItemTool()) RemoveItemFromArms();
+                if (itemForDrop.IsItemTool()) _slotSelector.RemoveItemFromArms();
             }
         }
         public void DropItems(InventoryItem itemForDrop)
@@ -170,7 +156,9 @@ namespace Inventory
             ItemDataSO itemData = itemForDrop.GetItemData();
             for (int i = 0; i < itemCount; i++)
             {
-                DropItem(itemData);
+                Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, _multipleDropItemOffset * i, _dropItemOffset));
+                GameObject item = Instantiate(itemData.collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
+                item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
             }
         }
         public void DropItem(ItemDataSO itemData)
@@ -179,62 +167,7 @@ namespace Inventory
             GameObject item = Instantiate(itemData.collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
             item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
         }
-        private void ChangeSelectedSlot(int newSlot)
-        {
-            if (_selectedSlot >= 0) _inventorySlots[_selectedSlot].DeselectSlot();
-            if (_isToolInArms) RemoveItemFromArms();
-
-            _selectedSlot = newSlot - 1;
-            _inventorySlots[_selectedSlot].SelectSlot();
-
-            InventoryItem itemInSlot = _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>();
-            if (itemInSlot != null)
-            {
-                ItemDataSO itemData = itemInSlot.GetItemData();
-                if (itemData.type == ItemDataSO.ItemType.Tool)
-                {
-                    CreateToolInHands(itemData);
-                }
-            }
-            else _isToolInArms = false;
-        }
-        private void ChangeSlotToNext()
-        {
-            int nextSlot = (_selectedSlot + 1) + 1;
-            if (nextSlot > _slotsCount) nextSlot = 1;
-            ChangeSelectedSlot(nextSlot);
-        }
-        private void ChangeSlotToPrevious()
-        {
-            int previousSlot = (_selectedSlot + 1) - 1;
-            if (previousSlot < 1) previousSlot = _slotsCount;
-            ChangeSelectedSlot(previousSlot);
-        }
-
-        private void CreateToolInHands(ItemDataSO itemData)
-        {
-            GameObject spawnedItem = Instantiate(itemData.inHandPrefab, _toolSlot.position, _toolSlot.rotation);
-            spawnedItem.transform.parent = _toolSlot;
-            _isToolInArms = true;
-        }
-        private void CheckForToolInSelectedSlot()
-        {
-            InventoryItem item = _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>();
-            if (item != null)
-            {
-                if (item.IsItemTool()) CreateToolInHands(item.GetItemData());
-            }
-        }
-        private void UseSelectedItem()
-        {
-            _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>().RemoveItem();
-        }
-
-        private void RemoveItemFromArms()
-        {
-            if (_toolSlot.childCount > 0) Destroy(_toolSlot.GetChild(0).gameObject);
-            _isToolInArms = false;
-        }
+      
         private void ChangeInventoryState()
         {
             if (!_isOpened) OpenInventory();
@@ -245,7 +178,7 @@ namespace Inventory
         {
             _mainInventoryGroup.SetActive(false);
             _isOpened = false;
-            CheckForToolInSelectedSlot();
+            _slotSelector.CheckForToolInSelectedSlot();
 
 
             _inputSystem.UnlockControl();
@@ -259,7 +192,7 @@ namespace Inventory
 
             _mainInventoryGroup.SetActive(true);
             _isOpened = true;
-            RemoveItemFromArms();
+            _slotSelector.RemoveItemFromArms();
         }
     }
 }
