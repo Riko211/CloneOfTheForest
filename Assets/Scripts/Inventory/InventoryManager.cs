@@ -164,10 +164,19 @@ namespace Inventory
                 if (itemForDrop.IsItemTool()) RemoveItemFromArms();
             }
         }
-        public void DropItem(InventoryItem itemForDrop)
+        public void DropItems(InventoryItem itemForDrop)
+        {
+            int itemCount = itemForDrop.GetItemCount();
+            ItemDataSO itemData = itemForDrop.GetItemData();
+            for (int i = 0; i < itemCount; i++)
+            {
+                DropItem(itemData);
+            }
+        }
+        public void DropItem(ItemDataSO itemData)
         {
             Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, 0f, _dropItemOffset));
-            GameObject item = Instantiate(itemForDrop.GetItemData().collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
+            GameObject item = Instantiate(itemData.collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
             item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
         }
         private void ChangeSelectedSlot(int newSlot)

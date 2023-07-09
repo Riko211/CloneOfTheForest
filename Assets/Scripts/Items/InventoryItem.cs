@@ -82,7 +82,7 @@ namespace Inventory
                     bool isAdded = _inventoryManager.AddCurrentItemToInventory(this);
                     if (!isAdded)
                     {
-                        _inventoryManager.DropItem(this);
+                        _inventoryManager.DropItems(this);
                         Destroy(gameObject);
                     }
                 }
