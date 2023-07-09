@@ -9,7 +9,7 @@ namespace Inventory
 {
     public class InventorySlot : MonoBehaviour, IDropHandler
     {
-        public Action OnItemTake;
+        public Action OnItemTake, OnItemDrop;
 
         [SerializeField]
         private Image _image;
@@ -75,6 +75,7 @@ namespace Inventory
                         }
                     }
                 }
+                OnItemDrop?.Invoke();
             }
         }
     }

@@ -9,7 +9,7 @@ namespace Inventory
         [SerializeField]
         private InventoryManager _inventoryManager;
         [SerializeField]
-        private CraftingSlot[] _craftingSlots;
+        private InventorySlot[] _craftingSlots;
         [SerializeField]
         private InventorySlot _outputSlot;
         [SerializeField]
@@ -24,15 +24,19 @@ namespace Inventory
         private void Start()
         {
             _outputSlot.OnItemTake += PickItemFromOutputSlot;
-            foreach (CraftingSlot slot in _craftingSlots) slot.OnItemDropAction += CheckForRecipe;
+            foreach (InventorySlot slot in _craftingSlots) slot.OnItemDrop += CheckForRecipe;
+            foreach (InventorySlot slot in _craftingSlots) slot.OnItemTake += CheckForRecipe;
         }
         private void OnDestroy()
         {
             _outputSlot.OnItemTake -= PickItemFromOutputSlot;
-            foreach (CraftingSlot slot in _craftingSlots) slot.OnItemDropAction -= CheckForRecipe;
+            foreach (InventorySlot slot in _craftingSlots) slot.OnItemDrop -= CheckForRecipe;
+            foreach (InventorySlot slot in _craftingSlots) slot.OnItemTake -= CheckForRecipe;
         }
         private void CheckForRecipe()
         {
+            if (CheckForItemInOutputSlot()) ClearOutputSlot();
+
             ItemDataSO[] itemsInCraftSlots = new ItemDataSO[_craftingSlots.Length];
             for (int i = 0; i < _craftingSlots.Length; i++)
             {
@@ -63,7 +67,7 @@ namespace Inventory
         }
         private bool CheckForItemsInCraftingSlots()
         {
-            foreach(CraftingSlot slot in _craftingSlots)
+            foreach(InventorySlot slot in _craftingSlots)
             {
                 if (slot.transform.childCount > 0) return true;
             }
@@ -73,10 +77,22 @@ namespace Inventory
         {
             _inventoryManager.SpawnItemInSlot(itemData, _outputSlot);
         }
+        private void ClearOutputSlot()
+        {
+            if (CheckForItemInOutputSlot())
+            {
+                InventoryItem item = _outputSlot.GetComponentInChildren<InventoryItem>();
+                Destroy(item.gameObject);
+            }
+        }
+        private bool CheckForItemInOutputSlot()
+        {
+            return _outputSlot.transform.childCount > 0;
+        }
 
         private void PickItemFromOutputSlot()
         {
-            foreach (CraftingSlot slot in _craftingSlots)
+            foreach (InventorySlot slot in _craftingSlots)
             {
                 InventoryItem itemInSlot = slot.GetComponentInChildren<InventoryItem>();
                 if (itemInSlot != null) itemInSlot.RemoveItem();

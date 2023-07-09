@@ -8,11 +8,11 @@ namespace Inventory
 {
     public class CraftingSlot : MonoBehaviour, IDropHandler
     {
-        public Action OnItemDropAction;
+        public Action OnItemDrop;
 
         public void OnDrop(PointerEventData eventData)
         {
-            OnItemDropAction?.Invoke();
+            OnItemDrop?.Invoke();
         }
     }
 }

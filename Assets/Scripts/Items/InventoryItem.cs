@@ -72,7 +72,11 @@ namespace Inventory
             if (_parentBeforeDrag == _parentAfterDrag)
             {
                 InventorySlot slot = _parentBeforeDrag.GetComponent<InventorySlot>();
-                if (slot.IsCanPutItem()) transform.SetParent(_parentAfterDrag);
+                if (slot.IsCanPutItem()) 
+                {
+                    transform.SetParent(_parentAfterDrag);
+                    _parentAfterDrag.GetComponent<InventorySlot>().OnItemDrop?.Invoke();
+                }
                 else _inventoryManager.AddCurrentItemsToInventory(this);
             }
         }
@@ -95,6 +99,7 @@ namespace Inventory
 
         public void SetSlot(Transform parent)
         {
+            _parentBeforeDrag.GetComponent<InventorySlot>().OnItemTake?.Invoke();
             _parentAfterDrag = parent;
             transform.SetParent(_parentAfterDrag);
         }
