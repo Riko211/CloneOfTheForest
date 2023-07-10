@@ -412,6 +412,7 @@ MonoBehaviour:
   - {fileID: 7655264746572010982}
   - {fileID: 3114731429098815567}
   _mainInventoryGroup: {fileID: 1241425343359053147}
+  _dropZone: {fileID: 6047904606311401406}
   _inventoryRoot: {fileID: 7171575927127985993}
   _inventoryItemPrefab: {fileID: 3420606057023034817, guid: 27c337c85b3637441920ddf1662bbe94,
     type: 3}
@@ -1269,6 +1270,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13bb33080741575439d433b355bce590, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6047904606311401406 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4209961737871165461, guid: beda7a45b01bcac4a9099db1470811d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7602833558711816107}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b594b01fc3cc1848940b9cb2efe2b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &6515725885223773455 stripped

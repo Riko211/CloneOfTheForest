@@ -2,12 +2,16 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropZone : MonoBehaviour, IDropHandler
+namespace Inventory
 {
-    public Action OnItemDrop;
-
-    public void OnDrop(PointerEventData eventData)
+    public class DropZone : MonoBehaviour, IDropHandler
     {
-        OnItemDrop?.Invoke();
+        public Action<InventoryItem> OnItemDrop;
+
+        public void OnDrop(PointerEventData eventData)
+        {
+            OnItemDrop?.Invoke(eventData.pointerDrag.GetComponent<InventoryItem>());
+            Destroy(eventData.pointerDrag.gameObject);
+        }
     }
 }

@@ -11,6 +11,8 @@ namespace Inventory
         private InventorySlot[] _inventorySlots;
         [SerializeField]
         private GameObject _mainInventoryGroup;
+        [SerializeField]
+        private DropZone _dropZone;
         [SerializeField, Tooltip("Inventory canvas")]
         private Transform _inventoryRoot;
         [SerializeField]
@@ -31,11 +33,13 @@ namespace Inventory
             _isOpened = _mainInventoryGroup.activeSelf;
             _inputSystem = AllServices.Container.Single<InputSystem>();
 
+            _dropZone.OnItemDrop += DropItems;
             _inputSystem.OpenInventoryAction += ChangeInventoryState;
             _inputSystem.DropItemAction += DropItemFromSelectedSlot;
         }
         private void OnDestroy()
         {
+            _dropZone.OnItemDrop -= DropItems;
             _inputSystem.OpenInventoryAction -= ChangeInventoryState;
             _inputSystem.DropItemAction -= DropItemFromSelectedSlot;
 
