@@ -9,10 +9,7 @@ namespace Player.Items
     public class Sapling : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _saplingBlueprint;
-
-        [SerializeField]
-        private GameObject _sapling;
+        private ConstructionSO _saplingData;
 
         [SerializeField]
         private float _raycastLength = 5f;
@@ -30,7 +27,7 @@ namespace Player.Items
             _inputSystem = AllServices.Container.Single<InputSystem>();
             _eventManager = AllServices.Container.Single<EventManager>();
 
-            _blueprint = Instantiate(_saplingBlueprint);
+            _blueprint = Instantiate(_saplingData.blueprint);
 
             _mainCamera = Camera.main;
             _inputSystem.LMBClickAction += PlantTree;
@@ -58,7 +55,7 @@ namespace Player.Items
         }
         private void PlantTree()
         {
-            Instantiate(_sapling, _blueprint.transform.position, Quaternion.identity);
+            Instantiate(_saplingData.construction, _blueprint.transform.position, Quaternion.identity);
             _eventManager.SelectedItemUseAction?.Invoke();
             Destroy(gameObject);
         }

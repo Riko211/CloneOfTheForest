@@ -99,10 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e981bf50ea453e4cacd0c3cfc52446b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _saplingBlueprint: {fileID: 121964352008466776, guid: 8e3d4e45455c3fb4a8b96b238710bbc4,
-    type: 3}
-  _sapling: {fileID: 8344322408495528154, guid: 24e10839f07193947b58a5545a76f7c2,
-    type: 3}
+  _saplingData: {fileID: 11400000, guid: d0b71b8cab1fedb47b4be73ba362b96a, type: 2}
   _raycastLength: 5
   _terrainLayer:
     serializedVersion: 2
