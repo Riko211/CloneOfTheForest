@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7436b2f352184409a2452a45994999, type: 3}
+  m_Name: Logwall
+  m_EditorClassIdentifier: 
+  stackable: 1
+  maxStackSize: 4
+  type: 0
+  image: {fileID: 21300000, guid: f94ccfe337330c448b352fd4b4d7bfff, type: 3}
+  collectablePrefab: {fileID: 7059555844540036740, guid: 5210724221098344db008ea22e38cc58,
+    type: 3}
+  inHandPrefab: {fileID: 787390505992183968, guid: 114334f43e1a97c4d9053e80b576828c,
+    type: 3}

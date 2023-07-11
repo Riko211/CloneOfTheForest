@@ -6,8 +6,6 @@ namespace Inventory
     public class Construction : MonoBehaviour
     {
         [SerializeField]
-        private InventoryManager _inventoryManager;
-        [SerializeField]
         private float _raycastLength = 5;
         [SerializeField]
         private LayerMask _terrainLayer;
@@ -55,7 +53,7 @@ namespace Inventory
         }
         private void Construct()
         {
-            Instantiate(_constructionData.construction, _blueprint.transform.position, _blueprint.transform.rotation);
+            _construction = Instantiate(_constructionData.construction, _blueprint.transform.position, _blueprint.transform.rotation);
             _eventManager.SelectedItemUseAction?.Invoke();
             Destroy(gameObject);
         }
