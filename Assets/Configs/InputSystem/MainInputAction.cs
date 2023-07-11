@@ -125,6 +125,15 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateConstruction"",
+                    ""type"": ""Button"",
+                    ""id"": ""f105aabb-7aa3-49dc-9de1-9258efd60322"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -380,6 +389,17 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
                     ""action"": ""NextItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5ee03226-fd06-4f6e-91f0-2747e039acdb"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateConstruction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -405,6 +425,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         m_Player_LMBClick = m_Player.FindAction("LMBClick", throwIfNotFound: true);
         m_Player_NextItem = m_Player.FindAction("NextItem", throwIfNotFound: true);
         m_Player_PreviousItem = m_Player.FindAction("PreviousItem", throwIfNotFound: true);
+        m_Player_RotateConstruction = m_Player.FindAction("RotateConstruction", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -477,6 +498,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LMBClick;
     private readonly InputAction m_Player_NextItem;
     private readonly InputAction m_Player_PreviousItem;
+    private readonly InputAction m_Player_RotateConstruction;
     public struct PlayerActions
     {
         private @MainInputAction m_Wrapper;
@@ -492,6 +514,7 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         public InputAction @LMBClick => m_Wrapper.m_Player_LMBClick;
         public InputAction @NextItem => m_Wrapper.m_Player_NextItem;
         public InputAction @PreviousItem => m_Wrapper.m_Player_PreviousItem;
+        public InputAction @RotateConstruction => m_Wrapper.m_Player_RotateConstruction;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -534,6 +557,9 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @PreviousItem.started += instance.OnPreviousItem;
             @PreviousItem.performed += instance.OnPreviousItem;
             @PreviousItem.canceled += instance.OnPreviousItem;
+            @RotateConstruction.started += instance.OnRotateConstruction;
+            @RotateConstruction.performed += instance.OnRotateConstruction;
+            @RotateConstruction.canceled += instance.OnRotateConstruction;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -571,6 +597,9 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
             @PreviousItem.started -= instance.OnPreviousItem;
             @PreviousItem.performed -= instance.OnPreviousItem;
             @PreviousItem.canceled -= instance.OnPreviousItem;
+            @RotateConstruction.started -= instance.OnRotateConstruction;
+            @RotateConstruction.performed -= instance.OnRotateConstruction;
+            @RotateConstruction.canceled -= instance.OnRotateConstruction;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -610,5 +639,6 @@ public partial class @MainInputAction: IInputActionCollection2, IDisposable
         void OnLMBClick(InputAction.CallbackContext context);
         void OnNextItem(InputAction.CallbackContext context);
         void OnPreviousItem(InputAction.CallbackContext context);
+        void OnRotateConstruction(InputAction.CallbackContext context);
     }
 }

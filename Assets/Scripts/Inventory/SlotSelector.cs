@@ -61,7 +61,7 @@ namespace Inventory
         }
         public void RemoveItemFromArms()
         {
-            if (_toolSlot.childCount > 0) Destroy(_toolSlot.GetChild(0).gameObject);
+            if (_toolSlot.childCount > 0) Destroy(_toolSlot.GetChild(0).gameObject);            
             _isToolInArms = false;
         }
         public void CheckForToolInSelectedSlot()
@@ -74,8 +74,8 @@ namespace Inventory
         }
         public void CreateToolInHands(ItemDataSO itemData)
         {
-            GameObject spawnedItem = Instantiate(itemData.inHandPrefab, _toolSlot.position, _toolSlot.rotation);
-            spawnedItem.transform.parent = _toolSlot;
+            GameObject toolInHands = Instantiate(itemData.inHandPrefab, _toolSlot.position, _toolSlot.rotation);
+            toolInHands.transform.parent = _toolSlot;
             _isToolInArms = true;
         }
         public int GetSelectedSlot()
@@ -96,7 +96,13 @@ namespace Inventory
         }
         private void UseSelectedItem()
         {
-            _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>().RemoveItem();
+            InventoryItem selectedItem = _inventorySlots[_selectedSlot].GetComponentInChildren<InventoryItem>();
+            if (selectedItem.GetItemCount() == 1)
+            {
+                selectedItem.RemoveItem();
+                if (_toolSlot.childCount > 0) Destroy(_toolSlot.GetChild(0).gameObject);
+            }
+            else selectedItem.RemoveItem();
         }
 
     }

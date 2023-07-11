@@ -11,7 +11,8 @@ namespace Infrastructure.Services
 
         public Vector2 MousePosition { get; private set; }
 
-        public Action JumpAction, OpenInventoryAction, ItemPickUpAction, DropItemAction, LMBClickAction, NextItemAction, PreviousItemAction;
+        public Action JumpAction, OpenInventoryAction, ItemPickUpAction, DropItemAction, LMBClickAction, NextItemAction, PreviousItemAction,
+                      StartRotateConstructionAction, StopRotateConstructionAction;
         public Action<int> ToolbarAction;
         public bool IsControlLocked { get; private set; }
 
@@ -52,6 +53,8 @@ namespace Infrastructure.Services
             _mainInputAction.Player.LMBClick.performed += LMBClickCallBack;
             _mainInputAction.Player.NextItem.performed += NextItemCallBack;
             _mainInputAction.Player.PreviousItem.performed += PreviousItemCallBack;
+            _mainInputAction.Player.RotateConstruction.started += StartRotateConstructionCallBack;
+            _mainInputAction.Player.RotateConstruction.canceled += StopRotateConstructionCallBack;
         }
         public void LMBClickCallBack(InputAction.CallbackContext obj)
         {
@@ -84,6 +87,14 @@ namespace Infrastructure.Services
         public void PreviousItemCallBack(InputAction.CallbackContext obj)
         {
             if (PreviousItemAction != null) PreviousItemAction.Invoke();
+        }
+        public void StartRotateConstructionCallBack(InputAction.CallbackContext obj)
+        {
+            if (StartRotateConstructionAction != null) StartRotateConstructionAction.Invoke();
+        }
+        public void StopRotateConstructionCallBack(InputAction.CallbackContext obj)
+        {
+            if (StopRotateConstructionAction != null) StopRotateConstructionAction.Invoke();
         }
 
         public void LockControl()

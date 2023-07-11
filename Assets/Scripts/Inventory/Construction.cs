@@ -1,4 +1,5 @@
 using Infrastructure.Services;
+using System.Collections;
 using UnityEngine;
 
 namespace Inventory
@@ -11,6 +12,8 @@ namespace Inventory
         private LayerMask _terrainLayer;
         [SerializeField] 
         private ConstructionSO _constructionData;
+        [SerializeField]
+        private float _rotationSpeed = 100f;
 
         private GameObject _blueprint;
         private GameObject _construction;
@@ -29,10 +32,17 @@ namespace Inventory
 
             _mainCamera = Camera.main;
             _inputSystem.LMBClickAction += Construct;
+
+            _inputSystem.StartRotateConstructionAction += StartRotateBlueprint;
+            _inputSystem.StopRotateConstructionAction += StopRotateBlueprint;
         }
         private void OnDestroy()
         {
             _inputSystem.LMBClickAction -= Construct;
+
+            _inputSystem.StartRotateConstructionAction -= StartRotateBlueprint;
+            _inputSystem.StopRotateConstructionAction -= StopRotateBlueprint;
+
             Destroy(_blueprint.gameObject);
         }
         private void Update()
@@ -55,7 +65,27 @@ namespace Inventory
         {
             _construction = Instantiate(_constructionData.construction, _blueprint.transform.position, _blueprint.transform.rotation);
             _eventManager.SelectedItemUseAction?.Invoke();
-            Destroy(gameObject);
+        }
+        private void StartRotateBlueprint()
+        {
+            StartCoroutine(RotateBlueprint());
+        }
+        private void StopRotateBlueprint()
+        {
+            StopAllCoroutines();
+        }
+
+        private IEnumerator RotateBlueprint()
+        {
+            Vector3 curRotation;
+            while (true)
+            {
+                curRotation = _blueprint.transform.rotation.eulerAngles;
+                curRotation.y += _rotationSpeed * Time.deltaTime;
+                Debug.Log(curRotation);
+                _blueprint.transform.rotation = Quaternion.Euler(curRotation);
+                yield return new WaitForSeconds(0.01f);
+            }
         }
     }
 }

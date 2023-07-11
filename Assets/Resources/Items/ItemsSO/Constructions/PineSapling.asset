@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d7436b2f352184409a2452a45994999, type: 3}
   m_Name: PineSapling
   m_EditorClassIdentifier: 
-  stackable: 1
+  stackable: 0
   maxStackSize: 1
   type: 0
   image: {fileID: 21300000, guid: 23722d41b41aa734f80826c6115891ac, type: 3}

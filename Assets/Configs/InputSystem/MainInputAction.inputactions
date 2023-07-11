@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RotateConstruction",
+                    "type": "Button",
+                    "id": "f105aabb-7aa3-49dc-9de1-9258efd60322",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -356,6 +365,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "NextItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ee03226-fd06-4f6e-91f0-2747e039acdb",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RotateConstruction",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

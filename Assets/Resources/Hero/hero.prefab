@@ -447,6 +447,7 @@ MonoBehaviour:
   _recipes:
   - {fileID: 11400000, guid: 900f20e82ade5284bba817b33d28b5ce, type: 2}
   - {fileID: 11400000, guid: 22897665b32b5f24cade6f01a4835cc7, type: 2}
+  - {fileID: 11400000, guid: f362c7b6a832aef4e87bc514d0cbdad0, type: 2}
 --- !u!114 &1076301829962049847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,7 +465,7 @@ MonoBehaviour:
   - itemData: {fileID: 11400000, guid: 4c76b28c1dfe09846bc79477c7881b3b, type: 2}
     count: 1
   - itemData: {fileID: 11400000, guid: 2bc0fc78cb522d2438e51afae1603d07, type: 2}
-    count: 4
+    count: 8
   - itemData: {fileID: 11400000, guid: cd841c3be4f8c8c44a0f2120004818f3, type: 2}
     count: 32
   - itemData: {fileID: 11400000, guid: 9d28afb1cf0a77d41b792c9cbabc6d52, type: 2}
@@ -534,7 +535,7 @@ MonoBehaviour:
   _playerWidht: 0.5
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 897
   _isGrounded: 0
   _gravitation: 9.81
 --- !u!114 &37442093752786046

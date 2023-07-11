@@ -104,7 +104,7 @@ namespace Player
         {
             if (_isGrounded && !_jumpLock)
             {
-                _yMove = -2f;
+                _yMove = -3f;
                 _charController.Move(new Vector3(0, _yMove, 0) * Time.deltaTime);
             }
             else
