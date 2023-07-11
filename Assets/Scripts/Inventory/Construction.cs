@@ -33,15 +33,21 @@ namespace Inventory
             _mainCamera = Camera.main;
             _inputSystem.LMBClickAction += Construct;
 
-            _inputSystem.StartRotateConstructionAction += StartRotateBlueprint;
-            _inputSystem.StopRotateConstructionAction += StopRotateBlueprint;
+            if (_constructionData.type == ConstructionSO.ConstructionType.SimpleConstruction)
+            {
+                _inputSystem.StartRotateConstructionAction += StartRotateBlueprint;
+                _inputSystem.StopRotateConstructionAction += StopRotateBlueprint;
+            }
         }
         private void OnDestroy()
         {
             _inputSystem.LMBClickAction -= Construct;
 
-            _inputSystem.StartRotateConstructionAction -= StartRotateBlueprint;
-            _inputSystem.StopRotateConstructionAction -= StopRotateBlueprint;
+            if (_constructionData.type == ConstructionSO.ConstructionType.SimpleConstruction)
+            {
+                _inputSystem.StartRotateConstructionAction -= StartRotateBlueprint;
+                _inputSystem.StopRotateConstructionAction -= StopRotateBlueprint;
+            }
 
             Destroy(_blueprint.gameObject);
         }
@@ -58,6 +64,17 @@ namespace Inventory
             if (Physics.Raycast(ray, out hit, _raycastLength, _terrainLayer))
             {
                 _blueprint.transform.position = hit.point;
+                
+                if (!_constructionData.verticalConstruction)
+                {
+                    Vector3 newRotation;
+
+
+                    newRotation = (Quaternion.FromToRotation(_blueprint.transform.up, hit.normal) * _blueprint.transform.rotation).eulerAngles;
+                    newRotation.y = _blueprint.transform.rotation.eulerAngles.y;
+
+                    _blueprint.transform.rotation = Quaternion.Euler(newRotation);
+                } 
             }
 
         }
@@ -82,10 +99,15 @@ namespace Inventory
             {
                 curRotation = _blueprint.transform.rotation.eulerAngles;
                 curRotation.y += _rotationSpeed * Time.deltaTime;
-                Debug.Log(curRotation);
                 _blueprint.transform.rotation = Quaternion.Euler(curRotation);
                 yield return new WaitForSeconds(0.01f);
             }
+        }
+        
+        private bool CanBeConstructed()
+        {
+            
+            return true;
         }
     }
 }
