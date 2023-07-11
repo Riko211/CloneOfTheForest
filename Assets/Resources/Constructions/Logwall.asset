@@ -17,4 +17,4 @@ MonoBehaviour:
   blueprint: {fileID: 686630169652603955, guid: fbbe7313c52196b4b971a4899265a6f0,
     type: 3}
   type: 0
-  verticalConstruction: 1
+  verticalConstruction: 0

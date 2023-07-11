@@ -150,8 +150,12 @@ namespace Inventory
                 Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, 0f, _dropItemOffset));
                 GameObject item = Instantiate(itemForDrop.GetItemData().collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
                 item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
-                itemForDrop.RemoveItem();
-                if (itemForDrop.IsItemTool()) _slotSelector.RemoveItemFromArms();
+                if (itemForDrop.IsItemTool() && itemForDrop.GetItemCount() == 1)
+                {
+                    _slotSelector.RemoveItemFromArms();
+                    itemForDrop.RemoveItem();
+                }
+                else if(itemForDrop.IsItemTool()) itemForDrop.RemoveItem();
             }
         }
         public void DropItems(InventoryItem itemForDrop)
