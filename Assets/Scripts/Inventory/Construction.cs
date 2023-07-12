@@ -10,6 +10,8 @@ namespace Inventory
         private float _raycastLength = 5;
         [SerializeField]
         private LayerMask _terrainLayer;
+        [SerializeField]
+        private LayerMask _foundationLayer;
         [SerializeField] 
         private ConstructionSO _constructionData;
         [SerializeField]
@@ -17,6 +19,7 @@ namespace Inventory
 
         private GameObject _blueprint;
         private GameObject _construction;
+        private Collider _priorityPoint;
 
         private Camera _mainCamera;
         private InputSystem _inputSystem;
@@ -61,26 +64,73 @@ namespace Inventory
             var ray = _mainCamera.ViewportPointToRay(Vector3.one * 0.5f);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit, _raycastLength, _terrainLayer))
+            if (_constructionData.type == ConstructionSO.ConstructionType.Foundation)
             {
-                _blueprint.transform.position = hit.point;
-                
-                if (!_constructionData.verticalConstruction)
+                Vector3 checkPoint = _mainCamera.transform.position + _mainCamera.transform.forward * 5;
+                Collider[] targets = Physics.OverlapCapsule(_mainCamera.transform.position, checkPoint, 3f, _foundationLayer);
+                if (targets.Length != 0)
                 {
-                    Vector3 newRotation;
+                    Collider priorityTarget = targets[0];
+
+                    foreach (Collider target in targets)
+                    {
+                        Vector3 cameraPos = _mainCamera.transform.position;
+
+                        float angleToTarget = Vector3.Angle((cameraPos + _mainCamera.transform.forward) - cameraPos, target.transform.position - cameraPos);
+                        float angleToPrevious = Vector3.Angle((cameraPos + _mainCamera.transform.forward) - cameraPos, priorityTarget.transform.position - cameraPos);
+
+                        if (angleToTarget < angleToPrevious) priorityTarget = target;
+                    }
+                    _priorityPoint = priorityTarget;
+                    _blueprint.transform.position = priorityTarget.transform.position;
+                }
+                else
+                {
+                    if (Physics.Raycast(ray, out hit, _raycastLength, _terrainLayer))
+                    {
+                        _blueprint.transform.position = hit.point;
+
+                        if (!_constructionData.verticalConstruction)
+                        {
+                            Vector3 newRotation;
 
 
-                    newRotation = (Quaternion.FromToRotation(_blueprint.transform.up, hit.normal) * _blueprint.transform.rotation).eulerAngles;
-                    newRotation.y = _blueprint.transform.rotation.eulerAngles.y;
+                            newRotation = (Quaternion.FromToRotation(_blueprint.transform.up, hit.normal) * _blueprint.transform.rotation).eulerAngles;
+                            newRotation.y = _blueprint.transform.rotation.eulerAngles.y;
 
-                    _blueprint.transform.rotation = Quaternion.Euler(newRotation);
-                } 
+                            _blueprint.transform.rotation = Quaternion.Euler(newRotation);
+                        }
+                    }
+                }
+            }
+            else if (_constructionData.type == ConstructionSO.ConstructionType.SimpleConstruction)
+            {
+                if (Physics.Raycast(ray, out hit, _raycastLength, _terrainLayer))
+                {
+                    _blueprint.transform.position = hit.point;
+
+                    if (!_constructionData.verticalConstruction)
+                    {
+                        Vector3 newRotation;
+
+
+                        newRotation = (Quaternion.FromToRotation(_blueprint.transform.up, hit.normal) * _blueprint.transform.rotation).eulerAngles;
+                        newRotation.y = _blueprint.transform.rotation.eulerAngles.y;
+
+                        _blueprint.transform.rotation = Quaternion.Euler(newRotation);
+                    }
+                }
             }
 
         }
         private void Construct()
         {
             _construction = Instantiate(_constructionData.construction, _blueprint.transform.position, _blueprint.transform.rotation);
+            if (_constructionData.type != ConstructionSO.ConstructionType.SimpleConstruction && _priorityPoint != null)
+            {
+                Collider[] targets = Physics.OverlapSphere(_priorityPoint.transform.position, 0.3f, _foundationLayer);
+                foreach (Collider target in targets) Destroy(target.gameObject);
+            }
             _eventManager.SelectedItemUseAction?.Invoke();
         }
         private void StartRotateBlueprint()

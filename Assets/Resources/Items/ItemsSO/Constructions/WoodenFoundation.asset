@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d7436b2f352184409a2452a45994999, type: 3}
-  m_Name: Logwall
+  m_Name: WoodenFoundation
   m_EditorClassIdentifier: 
   stackable: 1
-  maxStackSize: 4
+  maxStackSize: 1
   type: 0
-  image: {fileID: 21300000, guid: f94ccfe337330c448b352fd4b4d7bfff, type: 3}
-  collectablePrefab: {fileID: 3543028173179713956, guid: 1a43663baa56d50419bcb8ec15583db4,
+  image: {fileID: 21300000, guid: b7cda8af5ade95a428b3e50839a24654, type: 3}
+  collectablePrefab: {fileID: 6732545864244526071, guid: 0d4fc1400e34a2c49b56d3d33762e459,
     type: 3}
-  inHandPrefab: {fileID: 787390505992183968, guid: 114334f43e1a97c4d9053e80b576828c,
+  inHandPrefab: {fileID: 3435787506717603949, guid: c13e142c081a5114d9bd5d3290cacca1,
     type: 3}
