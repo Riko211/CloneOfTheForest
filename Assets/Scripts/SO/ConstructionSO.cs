@@ -15,6 +15,7 @@ public class ConstructionSO : ScriptableObject
         SimpleConstruction,
         Foundation,
         Floor,
-        Wall
+        Wall,
+        Roof
     };
 }

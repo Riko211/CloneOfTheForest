@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7436b2f352184409a2452a45994999, type: 3}
+  m_Name: FloorWood
+  m_EditorClassIdentifier: 
+  stackable: 1
+  maxStackSize: 4
+  type: 0
+  image: {fileID: 21300000, guid: 2397184452a67d6409f297d6f4cec4f8, type: 3}
+  collectablePrefab: {fileID: 1711845229127316707, guid: b11ab46f86d66d4449bfc03ac97206a8,
+    type: 3}
+  inHandPrefab: {fileID: 7994551330291386983, guid: 255c9d4fd9d92684aad33f62eb53ed8b,
+    type: 3}
