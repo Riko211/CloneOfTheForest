@@ -476,6 +476,8 @@ MonoBehaviour:
     count: 16
   - itemData: {fileID: 11400000, guid: 6aa0c63ccb0d5b241b93f4864d63c650, type: 2}
     count: 16
+  - itemData: {fileID: 11400000, guid: 068b353da11488649af96d58c661f91a, type: 2}
+    count: 16
 --- !u!114 &7782693796173279873
 MonoBehaviour:
   m_ObjectHideFlags: 0
