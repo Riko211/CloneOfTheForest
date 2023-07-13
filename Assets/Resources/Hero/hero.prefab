@@ -541,7 +541,7 @@ MonoBehaviour:
   _playerWidht: 0.5
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 897
+    m_Bits: 58241
   _isGrounded: 0
   _gravitation: 9.81
 --- !u!114 &37442093752786046

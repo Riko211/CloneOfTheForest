@@ -77,6 +77,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8142456845981368673}
+  - component: {fileID: 862416979026071415}
   m_Layer: 0
   m_Name: WoodenFoundation
   m_TagString: Untagged
@@ -101,6 +102,31 @@ Transform:
   - {fileID: 2533615073529045036}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &862416979026071415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3806921517059419435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a2a28b0f81d474cb4e43397d11a011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interferingLayers:
+    serializedVersion: 2
+    m_Bits: 57344
+  _checkPoints:
+  - {fileID: 8471056204637725966}
+  - {fileID: 4328638159565627233}
+  - {fileID: 6865610530583111672}
+  - {fileID: 5689937481114693759}
+  - {fileID: 1373404656594598800}
+  - {fileID: 9104487122219694636}
+  - {fileID: 4537510390792007873}
+  - {fileID: 1832917115155424435}
+  _collider: {fileID: 8841804945178815036}
 --- !u!1 &5629838690141848674
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,12 +138,12 @@ GameObject:
   - component: {fileID: 1832917115155424435}
   - component: {fileID: 6841593882272496548}
   m_Layer: 11
-  m_Name: Point4
+  m_Name: WallPoint4
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1832917115155424435
 Transform:
   m_ObjectHideFlags: 0
@@ -165,12 +191,12 @@ GameObject:
   - component: {fileID: 1373404656594598800}
   - component: {fileID: 6957633924956474245}
   m_Layer: 11
-  m_Name: Point1
+  m_Name: WallPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1373404656594598800
 Transform:
   m_ObjectHideFlags: 0
@@ -218,12 +244,12 @@ GameObject:
   - component: {fileID: 5689937481114693759}
   - component: {fileID: 2388563532389672299}
   m_Layer: 10
-  m_Name: Point4
+  m_Name: FoundationPoint4
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5689937481114693759
 Transform:
   m_ObjectHideFlags: 0
@@ -271,12 +297,12 @@ GameObject:
   - component: {fileID: 8471056204637725966}
   - component: {fileID: 6145368911580103914}
   m_Layer: 10
-  m_Name: Point1
+  m_Name: FoundationPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8471056204637725966
 Transform:
   m_ObjectHideFlags: 0
@@ -324,12 +350,12 @@ GameObject:
   - component: {fileID: 4328638159565627233}
   - component: {fileID: 7612844875766956677}
   m_Layer: 10
-  m_Name: Point2
+  m_Name: FoundationPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4328638159565627233
 Transform:
   m_ObjectHideFlags: 0
@@ -412,12 +438,12 @@ GameObject:
   - component: {fileID: 6865610530583111672}
   - component: {fileID: 7387490198818957919}
   m_Layer: 10
-  m_Name: Point3
+  m_Name: FoundationPoint3
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6865610530583111672
 Transform:
   m_ObjectHideFlags: 0
@@ -465,12 +491,12 @@ GameObject:
   - component: {fileID: 9104487122219694636}
   - component: {fileID: 5358555465201224080}
   m_Layer: 11
-  m_Name: Point2
+  m_Name: WallPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9104487122219694636
 Transform:
   m_ObjectHideFlags: 0
@@ -518,12 +544,12 @@ GameObject:
   - component: {fileID: 4537510390792007873}
   - component: {fileID: 1677781916369042508}
   m_Layer: 11
-  m_Name: Point3
+  m_Name: WallPoint3
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4537510390792007873
 Transform:
   m_ObjectHideFlags: 0
@@ -572,7 +598,7 @@ GameObject:
   - component: {fileID: 2972002459586771211}
   - component: {fileID: 818137037824533493}
   - component: {fileID: 8841804945178815036}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

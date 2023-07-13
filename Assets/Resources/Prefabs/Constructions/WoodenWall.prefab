@@ -42,6 +42,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3948956714675880542}
+  - component: {fileID: 1442963994000295451}
   m_Layer: 0
   m_Name: WoodenWall
   m_TagString: Untagged
@@ -66,6 +67,26 @@ Transform:
   - {fileID: 5461296207874406437}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1442963994000295451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4433753425117494945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a2a28b0f81d474cb4e43397d11a011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interferingLayers:
+    serializedVersion: 2
+    m_Bits: 57344
+  _checkPoints:
+  - {fileID: 3130913308052113577}
+  - {fileID: 3211433927787990062}
+  - {fileID: 6896397440238109796}
+  _collider: {fileID: 3995130277080475003}
 --- !u!1 &4870712458421293125
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,12 +130,12 @@ GameObject:
   - component: {fileID: 6896397440238109796}
   - component: {fileID: 4969462931276109637}
   m_Layer: 11
-  m_Name: Point1
+  m_Name: WallPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6896397440238109796
 Transform:
   m_ObjectHideFlags: 0
@@ -162,12 +183,12 @@ GameObject:
   - component: {fileID: 3130913308052113577}
   - component: {fileID: 151612209534903990}
   m_Layer: 12
-  m_Name: Point1
+  m_Name: FloorPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3130913308052113577
 Transform:
   m_ObjectHideFlags: 0
@@ -216,7 +237,7 @@ GameObject:
   - component: {fileID: 6212079233024823097}
   - component: {fileID: 3498057266509873815}
   - component: {fileID: 3995130277080475003}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,12 +343,12 @@ GameObject:
   - component: {fileID: 3211433927787990062}
   - component: {fileID: 9149216366879532279}
   m_Layer: 12
-  m_Name: Point2
+  m_Name: FloorPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3211433927787990062
 Transform:
   m_ObjectHideFlags: 0

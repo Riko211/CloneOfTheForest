@@ -155,7 +155,7 @@ namespace Inventory
                     _slotSelector.RemoveItemFromArms();
                     itemForDrop.RemoveItem();
                 }
-                else if(itemForDrop.IsItemTool()) itemForDrop.RemoveItem();
+                else itemForDrop.RemoveItem();
             }
         }
         public void DropItems(InventoryItem itemForDrop)

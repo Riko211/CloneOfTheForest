@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   construction: {fileID: 4433753425117494945, guid: 7650df17777f17a4198401a96b3d7faa,
     type: 3}
-  blueprint: {fileID: 4513735573702028968, guid: e694c81343b14bf43b91b5f21cd34ff5,
+  blueprint: {fileID: 3817359957710874687, guid: e694c81343b14bf43b91b5f21cd34ff5,
     type: 3}
   type: 3
   verticalConstruction: 1
