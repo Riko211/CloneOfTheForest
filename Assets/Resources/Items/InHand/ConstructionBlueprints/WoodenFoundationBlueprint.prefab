@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 266004286874888335}
   - component: {fileID: 8180783132341555699}
   - component: {fileID: 396467281739690986}
-  - component: {fileID: 7231993944809502604}
+  - component: {fileID: 4243377902871745671}
   m_Layer: 0
   m_Name: WoodenFoundationBlueprint
   m_TagString: Untagged
@@ -86,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7231993944809502604
+--- !u!114 &4243377902871745671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,7 +95,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3435787506717603949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1614b54298d1d424ea73cdd939d67874, type: 3}
+  m_Script: {fileID: 11500000, guid: 4c42e3649d3c98d4ba29699b84d6b90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _raycastLength: 5
@@ -105,8 +105,5 @@ MonoBehaviour:
   _foundationLayer:
     serializedVersion: 2
     m_Bits: 1024
-  _wallLayer:
-    serializedVersion: 2
-    m_Bits: 2048
   _constructionData: {fileID: 11400000, guid: 5aa9b0325d848cb43be72788e50223e9, type: 2}
   _rotationSpeed: 100
