@@ -12,6 +12,8 @@ namespace Inventory
         private LayerMask _terrainLayer;
         [SerializeField]
         private LayerMask _foundationLayer;
+        [SerializeField]
+        private LayerMask _wallLayer;
         [SerializeField] 
         private ConstructionSO _constructionData;
         [SerializeField]
@@ -64,10 +66,16 @@ namespace Inventory
             var ray = _mainCamera.ViewportPointToRay(Vector3.one * 0.5f);
             RaycastHit hit;
 
-            if (_constructionData.type == ConstructionSO.ConstructionType.Foundation)
+            if (_constructionData.type != ConstructionSO.ConstructionType.SimpleConstruction)
             {
                 Vector3 checkPoint = _mainCamera.transform.position + _mainCamera.transform.forward * 5;
-                Collider[] targets = Physics.OverlapCapsule(_mainCamera.transform.position, checkPoint, 3f, _foundationLayer);
+                Collider[] targets;
+
+                if (_constructionData.type == ConstructionSO.ConstructionType.Foundation) targets = Physics.OverlapCapsule(_mainCamera.transform.position, checkPoint, 3f, _foundationLayer);
+                else if (_constructionData.type == ConstructionSO.ConstructionType.Wall) targets = Physics.OverlapCapsule(_mainCamera.transform.position, checkPoint, 3f, _wallLayer);
+                else targets = Physics.OverlapCapsule(_mainCamera.transform.position, checkPoint, 3f, _wallLayer);
+
+
                 if (targets.Length != 0)
                 {
                     Collider priorityTarget = targets[0];
@@ -83,6 +91,7 @@ namespace Inventory
                     }
                     _priorityPoint = priorityTarget;
                     _blueprint.transform.position = priorityTarget.transform.position;
+                    _blueprint.transform.rotation = priorityTarget.transform.rotation;
                 }
                 else
                 {
