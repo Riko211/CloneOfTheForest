@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1090164828971428839}
   - component: {fileID: 9153203549105884180}
   - component: {fileID: 601636115158730118}
-  - component: {fileID: 8417180683924173650}
+  - component: {fileID: -5450859800825677743}
   m_Layer: 0
   m_Name: FloorWood
   m_TagString: Untagged
@@ -86,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8417180683924173650
+--- !u!114 &-5450859800825677743
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,15 +95,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7994551330291386983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 898208635f9cc4b44bd2517db96b126b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ca8eb67506941947bce7e9eec7457a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _raycastLength: 5
   _terrainLayer:
     serializedVersion: 2
     m_Bits: 512
-  _floorLayer:
+  _connectionPointLayer:
     serializedVersion: 2
-    m_Bits: 4096
-  _constructionData: {fileID: 11400000, guid: ab24305c9a60dbb4eb5d5ebf8a1d5043, type: 2}
+    m_Bits: 1024
+  _constructionType: 2
+  _constructionData: {fileID: 11400000, guid: 068b353da11488649af96d58c661f91a, type: 2}
   _rotationSpeed: 100

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 266004286874888335}
   - component: {fileID: 8180783132341555699}
   - component: {fileID: 396467281739690986}
-  - component: {fileID: -1451105121092783012}
+  - component: {fileID: -6989441787233629989}
   m_Layer: 0
   m_Name: RoofWoodBlueprint
   m_TagString: Untagged
@@ -86,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1451105121092783012
+--- !u!114 &-6989441787233629989
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,15 +95,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3435787506717603949}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19aabf124d80a5640b1efca3b0f2eb9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ca8eb67506941947bce7e9eec7457a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _raycastLength: 5
   _terrainLayer:
     serializedVersion: 2
     m_Bits: 512
-  _roofLayer:
+  _connectionPointLayer:
     serializedVersion: 2
-    m_Bits: 65536
-  _constructionData: {fileID: 11400000, guid: 42f3151dfed4cbb43895dd0030e17807, type: 2}
+    m_Bits: 1024
+  _constructionType: 4
+  _constructionData: {fileID: 11400000, guid: ce6af349da458a648bd83b4b1d7673d4, type: 2}
   _rotationSpeed: 100

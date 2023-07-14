@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1686536870193126584}
   - component: {fileID: 5752927968508605884}
   - component: {fileID: 920803967813290260}
-  - component: {fileID: -1014826404441168652}
+  - component: {fileID: 2350282731109505175}
   m_Layer: 0
   m_Name: WallWood(Blueprint)
   m_TagString: Untagged
@@ -86,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1014826404441168652
+--- !u!114 &2350282731109505175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -95,15 +95,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4110759929073608359}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19e4d3e21ca7bb845994ef8d3fddd8ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ca8eb67506941947bce7e9eec7457a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _raycastLength: 5
   _terrainLayer:
     serializedVersion: 2
     m_Bits: 512
-  _wallLayer:
+  _connectionPointLayer:
     serializedVersion: 2
-    m_Bits: 2048
-  _constructionData: {fileID: 11400000, guid: 51d8aa7120fb161408713fc409c8621c, type: 2}
+    m_Bits: 1024
+  _constructionType: 3
+  _constructionData: {fileID: 11400000, guid: 6aa0c63ccb0d5b241b93f4864d63c650, type: 2}
   _rotationSpeed: 100
