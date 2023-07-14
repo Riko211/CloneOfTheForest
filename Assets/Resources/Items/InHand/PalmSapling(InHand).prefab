@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e981bf50ea453e4cacd0c3cfc52446b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _saplingData: {fileID: 11400000, guid: c7e1e17bf0a5c2e489c0af27837d7eb5, type: 2}
+  _saplingData: {fileID: 11400000, guid: ab94233d52c71c941bfae0338eddbf85, type: 2}
   _raycastLength: 5
   _terrainLayer:
     serializedVersion: 2

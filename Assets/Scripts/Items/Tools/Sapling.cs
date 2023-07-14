@@ -9,7 +9,7 @@ namespace Player.Items
     public class Sapling : MonoBehaviour
     {
         [SerializeField]
-        private ConstructionSO _saplingData;
+        private ItemDataSO _saplingData;
 
         [SerializeField]
         private float _raycastLength = 5f;

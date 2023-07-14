@@ -8,19 +8,37 @@ public class ItemDataSO : ScriptableObject
     public int maxStackSize = 1;
     public ItemType type;
 
-    [Header("UI")]
+    [Space, Header("UI, sprite for inventory item")]
     public Sprite image;
 
-    [Header("Collectable item")]
+    [Space, Header("Collectable item(dropped on ground item prefab)")]
     public GameObject collectablePrefab;
 
-    [Header("InHand item (for tools)")]
+    [Space, Header("InHand item (prefab for tools and construction blueprints)")]
     public GameObject inHandPrefab;
+
+    [Space, Header("Prefabs for constructions")]
+    public GameObject construction;
+    public GameObject blueprint;
+
+    public ConstructionType constructionType;
+
+    public bool verticalConstruction = true;
+
+
 
 
     public enum ItemType
     {
         Tool,
         Material
+    };
+    public enum ConstructionType
+    {
+        SimpleConstruction,
+        Foundation,
+        Floor,
+        Wall,
+        Roof
     };
 }

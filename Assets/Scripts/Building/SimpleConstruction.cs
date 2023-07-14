@@ -11,7 +11,7 @@ namespace Building
         [SerializeField]
         private LayerMask _terrainLayer;
         [SerializeField]
-        private ConstructionSO _constructionData;
+        private ItemDataSO _constructionData;
         [SerializeField]
         private float _rotationSpeed = 100f;
 

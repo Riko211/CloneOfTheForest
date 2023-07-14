@@ -20,3 +20,9 @@ MonoBehaviour:
     type: 3}
   inHandPrefab: {fileID: 2266268486172739285, guid: 727b6c3988f1ef34b96426e86aad88d8,
     type: 3}
+  construction: {fileID: 7817315799815433622, guid: 66068a31fde8dfe4c9eb5e2378e5891c,
+    type: 3}
+  blueprint: {fileID: 8986968703714771991, guid: c28001416dd3489429ca17cb7a537375,
+    type: 3}
+  constructionType: 0
+  verticalConstruction: 1
