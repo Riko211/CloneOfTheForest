@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 809.5431, g: 491.83014, b: 252.8359, a: 1}
+  m_IndirectSpecularColor: {r: 1391.461, g: 1466.9962, b: 1870.1809, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -30853,10 +30853,10 @@ MonoBehaviour:
   maxTessellationFactor: 3
   tessellationFactorFadeStart: 150
   tessellationFactorFadeRange: 1850
-  refractionColor: {r: 0.010022826, g: 0.21404114, b: 0.21404114, a: 1}
+  refractionColor: {r: 0.0317027, g: 0.41899896, b: 0.41899896, a: 1}
   maxRefractionDistance: 0.5
   absorptionDistance: 1.5
-  scatteringColor: {r: 0, g: 0.13286833, b: 0.13286833, a: 1}
+  scatteringColor: {r: 0, g: 0.29066423, b: 0.29066423, a: 1}
   ambientScattering: 0.2
   heightScattering: 0.2
   displacementScattering: 0.1
@@ -30878,70 +30878,52 @@ MonoBehaviour:
   waterCurrentDebugMode: 0
   currentDebugMultiplier: 1
   waterFoamDebugMode: 0
-  underWater: 0
+  underWater: 1
   volumeBounds: {fileID: 0}
   volumeDepth: 50
   volumeHeight: 0
   volumePrority: 0
-  absorptionDistanceMultiplier: 1
+  absorptionDistanceMultiplier: 7
   colorPyramidOffset: 1
   underWaterAmbientProbeContribution: 1
   underWaterScatteringColorMode: 0
   underWaterScatteringColor: {r: 0, g: 0.27, b: 0.23, a: 1}
   underWaterRefraction: 0
   largeCurrentSpeedValue: 0
-  largeCurrentMap: {fileID: 0}
-  largeCurrentRegionExtent: {x: 100, y: 100}
-  largeCurrentRegionOffset: {x: 0, y: 0}
+  largeCurrentMap: {fileID: 2800000, guid: aa568875cee96cc45a7fc6133bb7eb02, type: 3}
+  largeCurrentRegionExtent: {x: 2500, y: 2500}
+  largeCurrentRegionOffset: {x: 1250, y: 1250}
   largeCurrentMapInfluence: 1
   ripplesCurrentSpeedValue: 0
   ripplesCurrentMap: {fileID: 0}
-  ripplesCurrentRegionExtent: {x: 100, y: 100}
-  ripplesCurrentRegionOffset: {x: 0, y: 0}
+  ripplesCurrentRegionExtent: {x: 2500, y: 2500}
+  ripplesCurrentRegionOffset: {x: 1250, y: 1250}
   ripplesCurrentMapInfluence: 1
   deformation: 1
   deformationRes: 512
-  deformationAreaSize: {x: 200, y: 200}
-  deformationAreaOffset: {x: 0, y: 0}
+  deformationAreaSize: {x: 2500, y: 2500}
+  deformationAreaOffset: {x: 1250, y: 1250}
   foam: 1
   foamResolution: 512
-  foamAreaSize: {x: 200, y: 200}
-  foamAreaOffset: {x: 0, y: 0}
-  foamPersistenceMultiplier: 0.5
-  foamTextureTiling: 0.15
+  foamAreaSize: {x: 2500, y: 2500}
+  foamAreaOffset: {x: 1250, y: 1250}
+  foamPersistenceMultiplier: 1
+  foamTextureTiling: 1
   foamSmoothness: 1
   simulationFoam: 1
-  simulationFoamAmount: 0.2
+  simulationFoamAmount: 0.8
   simulationFoamMask: {fileID: 0}
-  simulationFoamMaskExtent: {x: 100, y: 100}
-  simulationFoamMaskOffset: {x: 0, y: 0}
+  simulationFoamMaskExtent: {x: 2500, y: 2500}
+  simulationFoamMaskOffset: {x: 1250, y: 1250}
   simulationFoamWindCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.2
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -30950,7 +30932,7 @@ MonoBehaviour:
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -30959,8 +30941,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   repetitionSize: 500
   largeOrientationValue: 0
-  largeWindSpeed: 30
-  largeChaos: 0.85
+  largeWindSpeed: 15
+  largeChaos: 1
   largeBand0Multiplier: 1
   largeBand0FadeMode: 1
   largeBand0FadeStart: 1500
@@ -30970,7 +30952,7 @@ MonoBehaviour:
   largeBand1FadeStart: 300
   largeBand1FadeDistance: 800
   ripples: 1
-  ripplesMotionMode: 0
+  ripplesMotionMode: 1
   ripplesOrientationValue: 0
   ripplesWindSpeed: 8
   ripplesChaos: 0.8
@@ -30979,8 +30961,8 @@ MonoBehaviour:
   ripplesFadeDistance: 200
   waterMask: {fileID: 0}
   waterMaskRemap: {x: 0, y: 1}
-  waterMaskExtent: {x: 100, y: 100}
-  waterMaskOffset: {x: 0, y: 0}
+  waterMaskExtent: {x: 2500, y: 2500}
+  waterMaskOffset: {x: 1250, y: 1250}
 --- !u!4 &872339162
 Transform:
   m_ObjectHideFlags: 0
