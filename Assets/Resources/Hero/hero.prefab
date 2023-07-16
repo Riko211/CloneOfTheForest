@@ -251,7 +251,7 @@ MonoBehaviour:
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
-    GateFit: 1
+    GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
     Iso: 200
@@ -416,6 +416,10 @@ MonoBehaviour:
   _inventoryRoot: {fileID: 7171575927127985993}
   _inventoryItemPrefab: {fileID: 3420606057023034817, guid: 27c337c85b3637441920ddf1662bbe94,
     type: 3}
+  _universalLootBag: {fileID: 5684323558453166199, guid: 7b4a9ec757e6df14abbab988f48cfab7,
+    type: 3}
+  _universalConstructionBlueprint: {fileID: 3435787506717603949, guid: 3c52f8efc2989cd49a49c50cc6456669,
+    type: 3}
   _slotSelector: {fileID: 7782693796173279873}
 --- !u!114 &2854436383005425925
 MonoBehaviour:
@@ -543,7 +547,7 @@ MonoBehaviour:
   _playerWidht: 0.5
   _whatIsGround:
     serializedVersion: 2
-    m_Bits: 58241
+    m_Bits: 25473
   _isGrounded: 0
   _gravitation: 9.81
 --- !u!114 &37442093752786046

@@ -17,6 +17,8 @@ namespace Inventory
         private Transform _inventoryRoot;
         [SerializeField]
         private GameObject _inventoryItemPrefab;
+        [SerializeField, Tooltip("If collecttable prefab is not set, this one will be thrown")]
+        private GameObject _universalLootBag;
         [SerializeField]
         private SlotSelector _slotSelector;
 
@@ -147,9 +149,9 @@ namespace Inventory
             InventoryItem itemForDrop = _inventorySlots[_slotSelector.GetSelectedSlot()].GetComponentInChildren<InventoryItem>();
             if (itemForDrop != null && _slotSelector.GetSelectedSlot() >= 0)
             {
+                ItemDataSO itemData = itemForDrop.GetItemData();
                 Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, 0f, _dropItemOffset));
-                GameObject item = Instantiate(itemForDrop.GetItemData().collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
-                item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
+                InstantiateDropItem(itemData, dropPosition);
                 if (itemForDrop.IsItemTool() && itemForDrop.GetItemCount() == 1)
                 {
                     _slotSelector.RemoveItemFromArms();
@@ -158,6 +160,7 @@ namespace Inventory
                 else itemForDrop.RemoveItem();
             }
         }
+
         public void DropItems(InventoryItem itemForDrop)
         {
             int itemCount = itemForDrop.GetItemCount();
@@ -165,17 +168,30 @@ namespace Inventory
             for (int i = 0; i < itemCount; i++)
             {
                 Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, _multipleDropItemOffset * i, _dropItemOffset));
-                GameObject item = Instantiate(itemData.collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
-                item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
+                InstantiateDropItem(itemData, dropPosition);
             }
         }
+
         public void DropItem(ItemDataSO itemData)
         {
             Vector3 dropPosition = transform.TransformPoint(new Vector3(0f, 0f, _dropItemOffset));
-            GameObject item = Instantiate(itemData.collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
-            item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
+            InstantiateDropItem(itemData, dropPosition);
         }
-      
+
+        private GameObject InstantiateDropItem(ItemDataSO itemData, Vector3 dropPosition)
+        {
+            GameObject item;
+            if (itemData.collectablePrefab != null)
+                item = Instantiate(itemData.collectablePrefab, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
+            else
+            {
+                item = Instantiate(_universalLootBag, dropPosition, Quaternion.Euler(new Vector3(0, transform.rotation.eulerAngles.y - 90, 0)));
+                item.GetComponent<CollectableItem>().SetItemData(itemData);
+            }
+            item.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.VelocityChange);
+            return item;
+        }
+
         private void ChangeInventoryState()
         {
             if (!_isOpened) OpenInventory();

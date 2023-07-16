@@ -74,14 +74,20 @@ namespace Inventory
         }
         public void CreateToolInHands(ItemDataSO itemData)
         {
-            GameObject toolInHands = Instantiate(itemData.inHandPrefab, _toolSlot.position, _toolSlot.rotation);
-            toolInHands.transform.parent = _toolSlot;
-            _isToolInArms = true;
+            GameObject toolInHands;
+            if (itemData.inHandPrefab != null)
+            {
+                toolInHands = Instantiate(itemData.inHandPrefab, _toolSlot.position, _toolSlot.rotation);
+                toolInHands.transform.parent = _toolSlot;
+                _isToolInArms = true;
+            }
+            else Debug.Log("Construction bluprint not setted - potik bachok");
         }
         public int GetSelectedSlot()
         {
             return _selectedSlot;
         }
+        
         private void ChangeSlotToNext()
         {
             int nextSlot = (_selectedSlot + 1) + 1;

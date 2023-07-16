@@ -19,3 +19,7 @@ MonoBehaviour:
   collectablePrefab: {fileID: 135073065602922842, guid: fe9b0bb93f2320449995f667d4f11eda,
     type: 3}
   inHandPrefab: {fileID: 0}
+  construction: {fileID: 0}
+  blueprint: {fileID: 0}
+  constructionType: 0
+  verticalConstruction: 1

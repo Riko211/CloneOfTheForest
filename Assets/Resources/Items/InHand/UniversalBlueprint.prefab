@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 266004286874888335}
   - component: {fileID: 8180783132341555699}
   - component: {fileID: 396467281739690986}
+  - component: {fileID: 8435296685038564960}
   m_Layer: 0
   m_Name: UniversalBlueprint
   m_TagString: Untagged
@@ -85,3 +86,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8435296685038564960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435787506717603949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ca8eb67506941947bce7e9eec7457a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _raycastLength: 5
+  _terrainLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _connectionPointLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _constructionType: 0
+  _constructionData: {fileID: 0}
+  _rotationSpeed: 100
