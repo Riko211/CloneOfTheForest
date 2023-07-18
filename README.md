@@ -1,7 +1,7 @@
 # CloneOfTheForest
 
 ## Inventory
-The inventory is implemented following the example of the Minecraft game. Items can be moved in inventory slots, swapped, thrown out of inventory on the ground. When throwing an item, it will be created in front of the character and fall to the ground, it can be picked up and returned to inventory. Information about each item is stored in scriptable objects.  
+The inventory is implemented following the example of the Minecraft game. Items can be moved in inventory slots, swapped, thrown out of inventory on the ground. When throwing an item, it will be created in front of the character and fall to the ground, it can be picked up and returned to inventory. When switching slots in the toolbar, if there is a tool in the slot, it will appear in the character's hands. Information about each item is stored in scriptable objects.  
 ![Inventory](https://github.com/Riko211/CloneOfTheForest/blob/main/Assets/2D/Screenshots/Inventory.jpg)
 ![Scriptable objects](https://github.com/Riko211/CloneOfTheForest/blob/main/Assets/2D/Screenshots/ScriptableObj1.jpg)
 
@@ -19,4 +19,7 @@ The construction is based on the construction mechanics as in the game "The Fore
 ![Building1](https://github.com/Riko211/CloneOfTheForest/blob/main/Assets/2D/Screenshots/Building1.jpg)
 ![Building2](https://github.com/Riko211/CloneOfTheForest/blob/main/Assets/2D/Screenshots/Building2.jpg)
 
+## Weather
 
+Rain:
+![Rain](https://github.com/Riko211/CloneOfTheForest/blob/main/Assets/2D/Screenshots/Rain1.jpg)
