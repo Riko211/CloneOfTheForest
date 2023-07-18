@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 1519.091, g: 1413.5177, b: 1546.5854, a: 1}
+  m_IndirectSpecularColor: {r: 1521.963, g: 1419.2267, b: 1557.9827, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -30863,7 +30863,7 @@ MonoBehaviour:
   directLightTipScattering: 0.6
   directLightBodyScattering: 0.5
   maximumHeightOverride: 0
-  caustics: 0
+  caustics: 1
   causticsIntensity: 0.5
   causticsPlaneBlendDistance: 1
   causticsResolution: 256
@@ -30900,7 +30900,7 @@ MonoBehaviour:
   ripplesCurrentRegionOffset: {x: 1250, y: 1250}
   ripplesCurrentMapInfluence: 1
   deformation: 1
-  deformationRes: 512
+  deformationRes: 256
   deformationAreaSize: {x: 2500, y: 2500}
   deformationAreaOffset: {x: 1250, y: 1250}
   foam: 1
